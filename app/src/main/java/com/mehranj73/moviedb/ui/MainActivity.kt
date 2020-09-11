@@ -1,7 +1,8 @@
-package com.mehranj73.moviedb
+package com.mehranj73.moviedb.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.mehranj73.moviedb.R
 
 class MainActivity : AppCompatActivity() {
 
