@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_movie"
+        android:icon="@drawable/ic_baseline_local_movies_24"
+        android:title="Movie"
+
+        />
+    <item
+        android:id="@+id/menu_tv_show"
+        android:icon="@drawable/ic_baseline_live_tv_24"
+        android:title="TV Show" />
+
+    <item
+        android:id="@+id/menu_trending"
+        android:icon="@drawable/ic_baseline_trending_up_24"
+        android:title="Trending" />
+
+</menu>
