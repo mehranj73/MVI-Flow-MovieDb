@@ -3,9 +3,7 @@ package com.mehranj73.moviedb.data.model
 data class MovieDetailResponse(
     val adult: Boolean,
     val backdrop_path: String,
-    val belongs_to_collection: BelongsToCollection,
     val budget: Int,
-    val genres: List<Genre>,
     val homepage: String,
     val id: Int,
     val imdb_id: String,
