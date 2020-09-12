@@ -1,12 +1,9 @@
 package com.mehranj73.moviedb.data.model
 
 data class MovieDetailResponse(
-    val adult: Boolean,
     val backdrop_path: String,
     val budget: Int,
-    val homepage: String,
     val id: Int,
-    val imdb_id: String,
     val original_language: String,
     val original_title: String,
     val overview: String,
@@ -16,9 +13,7 @@ data class MovieDetailResponse(
     val revenue: Int,
     val runtime: Int,
     val status: String,
-    val tagline: String,
     val title: String,
-    val video: Boolean,
     val vote_average: Double,
     val vote_count: Int
 )
