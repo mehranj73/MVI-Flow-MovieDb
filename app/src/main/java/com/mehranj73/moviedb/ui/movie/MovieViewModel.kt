@@ -1,5 +1,6 @@
 package com.mehranj73.moviedb.ui.movie
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import com.mehranj73.moviedb.ui.BaseViewModel
 import com.mehranj73.moviedb.ui.movie.state.MovieStateEvent
@@ -10,7 +11,7 @@ import kotlinx.coroutines.FlowPreview
 
 @ExperimentalCoroutinesApi
 @FlowPreview
-class MovieViewModel(
+class MovieViewModel @ViewModelInject constructor(
 
 ) : BaseViewModel<MovieStateEvent>() {
     override fun handleNewData(date: MovieStateEvent) {

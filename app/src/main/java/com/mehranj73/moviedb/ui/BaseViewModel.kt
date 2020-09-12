@@ -21,7 +21,7 @@ abstract class BaseViewModel<ViewState>: ViewModel() {
             = object : DataChannelManager<ViewState>() {
 
         override fun handleNewData(data: ViewState) {
-
+            this@BaseViewModel.handleNewData(data)
         }
     }
         val viewState : LiveData<ViewState>
