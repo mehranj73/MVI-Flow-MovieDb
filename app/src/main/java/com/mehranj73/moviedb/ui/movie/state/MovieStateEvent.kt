@@ -1,4 +1,26 @@
 package com.mehranj73.moviedb.ui.movie.state
 
-class MovieStateEvent {
+import com.mehranj73.moviedb.util.StateEvent
+
+sealed class MovieStateEvent : StateEvent {
+
+    class NowPlayingEvent() : MovieStateEvent(){
+        override fun errorInfo(): String {
+            return "Error getting now playing movies"
+        }
+
+        override fun toString(): String {
+            return "NowPlayingEvent"
+        }
+
+
+    }
+
+    class None: MovieStateEvent(){
+        override fun errorInfo(): String {
+            return "None."
+        }
+
+    }
+
 }
