@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/menu_movie"
+        android:id="@+id/menu_nav_movie"
         android:icon="@drawable/ic_baseline_local_movies_24"
         android:title="Movie"
 
