@@ -13,7 +13,7 @@ import kotlinx.coroutines.FlowPreview
 class TvViewModel @ViewModelInject constructor(): BaseViewModel<TvStateEvent>() {
 
 
-    override fun handleNewData(date: TvStateEvent) {
+    override fun handleNewData(data: TvStateEvent) {
         TODO("Not yet implemented")
     }
 

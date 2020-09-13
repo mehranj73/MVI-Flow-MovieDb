@@ -12,7 +12,7 @@ import kotlinx.coroutines.FlowPreview
 @FlowPreview
 @ExperimentalCoroutinesApi
 class TrendingViewModel @ViewModelInject constructor() : BaseViewModel<TrendingStateEvent>() {
-    override fun handleNewData(date: TrendingStateEvent) {
+    override fun handleNewData(data: TrendingStateEvent) {
         TODO("Not yet implemented")
     }
 

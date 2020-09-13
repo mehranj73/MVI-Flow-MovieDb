@@ -37,7 +37,7 @@ import kotlinx.coroutines.flow.Flow
 
     fun setupChannel() = dataChannelManager.setupChannel()
 
-    abstract fun handleNewData(date: ViewState)
+    abstract fun handleNewData(data: ViewState)
 
     abstract fun setStateEvent(stateEvent: StateEvent)
 
