@@ -1,11 +1,16 @@
 package com.mehranj73.moviedb.ui.tv_show
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import com.mehranj73.moviedb.ui.BaseViewModel
 import com.mehranj73.moviedb.ui.tv_show.state.TvStateEvent
 import com.mehranj73.moviedb.util.StateEvent
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 
-class TvViewModel : BaseViewModel<TvStateEvent>() {
+@FlowPreview
+@ExperimentalCoroutinesApi
+class TvViewModel @ViewModelInject constructor(): BaseViewModel<TvStateEvent>() {
 
 
     override fun handleNewData(date: TvStateEvent) {
