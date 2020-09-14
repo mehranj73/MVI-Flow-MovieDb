@@ -1,5 +1,6 @@
 package com.mehranj73.moviedb.data.repository
 
+import android.util.Log
 import com.mehranj73.moviedb.data.local.MovieDao
 import com.mehranj73.moviedb.data.model.Movie
 import com.mehranj73.moviedb.data.model.MovieResponse
@@ -14,6 +15,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
+private const val TAG = "MovieRepositoryImpl"
 class MovieRepositoryImpl @Inject constructor(
     val retrofitService: RetrofitService,
     val movieDao: MovieDao

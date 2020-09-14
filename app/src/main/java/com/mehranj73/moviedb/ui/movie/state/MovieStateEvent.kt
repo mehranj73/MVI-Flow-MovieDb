@@ -4,7 +4,7 @@ import com.mehranj73.moviedb.util.StateEvent
 
 sealed class MovieStateEvent : StateEvent {
 
-    class NowPlayingEvent() : MovieStateEvent(){
+    object NowPlayingEvent : MovieStateEvent() {
         override fun errorInfo(): String {
             return "Error getting now playing movies"
         }

@@ -9,11 +9,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import com.mehranj73.moviedb.R
+import com.mehranj73.moviedb.data.remote.RetrofitService
 import com.mehranj73.moviedb.ui.movie.state.MovieStateEvent
 import com.mehranj73.moviedb.util.StateMessageCallback
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 private const val TAG = "MovieFragment"
 
@@ -28,13 +32,17 @@ class MovieFragment(
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d(TAG, "onCreate: called")
+        
+
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         subscribeObservers()
-        viewModel.setStateEvent(MovieStateEvent.NowPlayingEvent())
+        viewModel.setStateEvent(MovieStateEvent.NowPlayingEvent)
+
 
     }
 
@@ -42,10 +50,12 @@ class MovieFragment(
     private fun subscribeObservers(){
 
         viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
-                if (viewState != null){
-                    Log.d(TAG, "subscribeObservers: ${viewState.movies?.get(0)?.original_title}")
-
-                }
+            if (viewState != null) {
+                Log.d(TAG, "subscribeObservers: ${viewState.movies?.get(0)?.original_title}")
+                Log.d(TAG, "subscribeObservers: called")
+            } else {
+                Log.d(TAG, "subscribeObservers: viewstate is null")
+            }
 
 
 

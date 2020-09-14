@@ -2,6 +2,7 @@ package com.mehranj73.moviedb.ui
 
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import com.bumptech.glide.RequestManager
@@ -12,8 +13,6 @@ import com.mehranj73.moviedb.ui.tv_show.TvDetailFragment
 import com.mehranj73.moviedb.ui.tv_show.TvEpisodesFragment
 import com.mehranj73.moviedb.util.BottomNavController
 import com.mehranj73.moviedb.util.BottomNavController.*
-import com.mehranj73.moviedb.util.Response
-import com.mehranj73.moviedb.util.StateMessageCallback
 import com.mehranj73.moviedb.util.setUpNavigation
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
@@ -109,27 +108,18 @@ class MainActivity : BaseActivity(),
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onResponseReceived(
-        response: Response,
-        stateMessageCallback: StateMessageCallback
-    ) {
-        TODO("Not yet implemented")
-    }
 
     override fun displayProgressBar(isLoading: Boolean) {
-        TODO("Not yet implemented")
+        if(isLoading){
+            animation_progressBar.visibility = View.VISIBLE
+        }
+        else{
+            animation_progressBar.visibility = View.GONE
+        }
     }
 
     override fun expandAppBar() {
-        TODO("Not yet implemented")
-    }
 
-    override fun hideSoftKeyboard() {
-        TODO("Not yet implemented")
-    }
-
-    override fun isStoragePermissionGranted(): Boolean {
-        TODO("Not yet implemented")
     }
 
 

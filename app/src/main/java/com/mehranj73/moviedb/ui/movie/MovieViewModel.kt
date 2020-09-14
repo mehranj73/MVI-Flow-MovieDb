@@ -53,7 +53,7 @@ class MovieViewModel @ViewModelInject constructor(
                         DataState.error <MovieViewState>(
                             response = Response(
                                 message = INVALID_STATE_EVENT,
-                                uiComponentType = UIComponentType.None(),
+                                uiComponentType = UIComponentType.Toast(),
                                 messageType = MessageType.Error()
                             ),
                             stateEvent = stateEvent
@@ -62,6 +62,7 @@ class MovieViewModel @ViewModelInject constructor(
                 }
             }
         }
+        launchJob(stateEvent, job)
 
     }
 

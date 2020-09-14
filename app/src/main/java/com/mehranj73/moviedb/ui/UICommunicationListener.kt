@@ -15,7 +15,5 @@ interface UICommunicationListener {
 
     fun expandAppBar()
 
-    fun hideSoftKeyboard()
 
-    fun isStoragePermissionGranted(): Boolean
 }

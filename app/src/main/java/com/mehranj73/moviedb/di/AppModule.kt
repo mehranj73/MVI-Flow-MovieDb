@@ -52,9 +52,7 @@ object AppModule {
     @Singleton
     @Provides
     fun provideGsonBuilder(): Gson {
-        return GsonBuilder()
-            .excludeFieldsWithoutExposeAnnotation()
-            .create()
+        return GsonBuilder().create()
     }
 
     @Provides
