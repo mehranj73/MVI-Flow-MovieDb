@@ -21,7 +21,7 @@ abstract class BaseTrendingFragment(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //setupActionBarWithNavController(R.id.trendingFragment, activity as AppCompatActivity)
+        setupActionBarWithNavController(R.id.trendingFragment, activity as AppCompatActivity)
     }
 
 

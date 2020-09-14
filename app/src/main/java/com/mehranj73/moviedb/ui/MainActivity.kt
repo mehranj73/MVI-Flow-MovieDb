@@ -7,11 +7,16 @@ import androidx.navigation.NavController
 import com.bumptech.glide.RequestManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.mehranj73.moviedb.R
-import com.mehranj73.moviedb.ui.movie.MovieFragment
+import com.mehranj73.moviedb.ui.movie.MovieDetailFragment
+import com.mehranj73.moviedb.ui.tv_show.TvDetailFragment
+import com.mehranj73.moviedb.ui.tv_show.TvEpisodesFragment
 import com.mehranj73.moviedb.util.BottomNavController
 import com.mehranj73.moviedb.util.BottomNavController.*
+import com.mehranj73.moviedb.util.Response
+import com.mehranj73.moviedb.util.StateMessageCallback
 import com.mehranj73.moviedb.util.setUpNavigation
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import javax.inject.Inject
@@ -27,19 +32,21 @@ class MainActivity : BaseActivity(),
 
     private lateinit var bottomNavigationView: BottomNavigationView
 
-    private val bottomNavController: BottomNavController by lazy(LazyThreadSafetyMode.NONE){
+    private val bottomNavController: BottomNavController by lazy(LazyThreadSafetyMode.NONE) {
         BottomNavController(
             this,
             R.id.main_fragments_container,
             R.id.menu_movie,
             this,
-            this)
+            this
+        )
 
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setSupportActionBar(tool_bar)
 
         bottomNavigationView = findViewById(R.id.bottom_navigation_view)
         bottomNavigationView.setUpNavigation(bottomNavController, this)
@@ -50,12 +57,7 @@ class MainActivity : BaseActivity(),
     }
 
 
-
-
-
-
-
-    override fun getNavGraphId(itemId: Int): Int = when(itemId) {
+    override fun getNavGraphId(itemId: Int): Int = when (itemId) {
         R.id.menu_movie -> {
             R.navigation.nav_movie
         }
@@ -71,6 +73,7 @@ class MainActivity : BaseActivity(),
         }
 
     }
+
     override fun onGraphChange() {
 
     }
@@ -78,10 +81,19 @@ class MainActivity : BaseActivity(),
     @FlowPreview
     @ExperimentalCoroutinesApi
     override fun onReselectNavItem(navController: NavController, fragment: Fragment) {
-        when(fragment){
-            is MovieFragment -> {
+        when (fragment) {
+            is MovieDetailFragment -> {
                 navController.navigate(R.id.action_movieDetailFragment_to_movieFragment)
             }
+            is TvDetailFragment -> {
+                navController.navigate(R.id.action_tvDetailFragment_to_tvFragment)
+
+            }
+            is TvEpisodesFragment -> {
+                navController.navigate(R.id.action_tvEpisodesFragment_to_tvFragment)
+
+            }
+
             else -> {
 
             }
@@ -91,10 +103,33 @@ class MainActivity : BaseActivity(),
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-        when(item.itemId){
+        when (item.itemId) {
             android.R.id.home -> onBackPressed()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onResponseReceived(
+        response: Response,
+        stateMessageCallback: StateMessageCallback
+    ) {
+        TODO("Not yet implemented")
+    }
+
+    override fun displayProgressBar(isLoading: Boolean) {
+        TODO("Not yet implemented")
+    }
+
+    override fun expandAppBar() {
+        TODO("Not yet implemented")
+    }
+
+    override fun hideSoftKeyboard() {
+        TODO("Not yet implemented")
+    }
+
+    override fun isStoragePermissionGranted(): Boolean {
+        TODO("Not yet implemented")
     }
 
 

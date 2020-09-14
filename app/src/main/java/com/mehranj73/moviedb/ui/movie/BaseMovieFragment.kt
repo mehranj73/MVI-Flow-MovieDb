@@ -33,7 +33,7 @@ abstract class BaseMovieFragment(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-       // setupActionBarWithNavController(R.id.movieFragment, activity as AppCompatActivity)
+        setupActionBarWithNavController(R.id.movieFragment, activity as AppCompatActivity)
         setupChannel()
     }
 

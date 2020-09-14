@@ -21,7 +21,7 @@ abstract class BaseTvFragment(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //setupActionBarWithNavController(R.id.tvFragment, activity as AppCompatActivity)
+        setupActionBarWithNavController(R.id.tvFragment, activity as AppCompatActivity)
     }
 
 

@@ -13,4 +13,11 @@
         android:layout_height="match_parent"
         android:text="tv fragment" />
 
+    <Button
+        android:layout_gravity="center|top"
+        android:id="@+id/go_to_tv_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="go to tv detail" />
+
 </FrameLayout>
