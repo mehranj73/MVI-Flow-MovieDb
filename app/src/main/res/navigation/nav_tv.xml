@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_tv"
+    app:startDestination="@id/tvFragment">
+    <fragment
+        android:id="@+id/tvFragment"
+        android:name="com.mehranj73.moviedb.ui.tv_show.TvFragment"
+        android:label="fragment_tv"
+        tools:layout="@layout/fragment_tv" >
+        <action
+            android:id="@+id/action_TvFragment_to_tvDetailFragment"
+            app:destination="@id/tvDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/tvDetailFragment"
+        android:name="com.mehranj73.moviedb.ui.tv_show.TvDetailFragment"
+        tools:layout="@layout/tv_detail_fragment"
+        android:label="TvDetailFragment" >
+        <action
+            android:id="@+id/action_tvDetailFragment_to_tvEpisodesFragment"
+            app:destination="@id/tvEpisodesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/tvEpisodesFragment"
+        android:name="com.mehranj73.moviedb.ui.tv_show.TvEpisodesFragment"
+        tools:layout="@layout/tv_episodes_fragment"
+        android:label="TvEpisodesFragment" />
+</navigation>

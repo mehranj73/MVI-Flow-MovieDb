@@ -5,4 +5,6 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class TvEpisodesFragment: BaseTvFragment(R.layout.tv_episodes_fragment) {
+
+
 }

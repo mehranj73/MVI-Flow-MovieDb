@@ -5,9 +5,12 @@
     android:layout_height="match_parent"
     tools:context=".ui.tv_show.TvFragment">
 
+
     <TextView
+        android:textSize="25sp"
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello" />
+        android:text="tv fragment" />
 
 </FrameLayout>

@@ -1,6 +1,7 @@
 package com.mehranj73.moviedb.ui
 
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import com.bumptech.glide.RequestManager
@@ -9,7 +10,10 @@ import com.mehranj73.moviedb.R
 import com.mehranj73.moviedb.ui.movie.MovieFragment
 import com.mehranj73.moviedb.util.BottomNavController
 import com.mehranj73.moviedb.util.BottomNavController.*
+import com.mehranj73.moviedb.util.setUpNavigation
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -17,11 +21,6 @@ class MainActivity : BaseActivity(),
     NavGraphProvider,
     OnNavigationGraphChanged,
     OnNavigationReselectedListener {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-    }
 
     @Inject
     lateinit var requestManager: RequestManager
@@ -31,17 +30,42 @@ class MainActivity : BaseActivity(),
     private val bottomNavController: BottomNavController by lazy(LazyThreadSafetyMode.NONE){
         BottomNavController(
             this,
-            R.id.nav_host_fragment_container,
-            R.id.menu_nav_movie,
+            R.id.main_fragments_container,
+            R.id.menu_movie,
             this,
             this)
 
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        bottomNavigationView = findViewById(R.id.bottom_navigation_view)
+        bottomNavigationView.setUpNavigation(bottomNavController, this)
+        if (savedInstanceState == null) {
+            bottomNavController.setupBottomNavigationBackStack(null)
+            bottomNavController.onNavigationItemSelected()
+        }
+    }
+
+
+
+
+
+
+
     override fun getNavGraphId(itemId: Int): Int = when(itemId) {
-        R.id.menu_nav_movie -> {
+        R.id.menu_movie -> {
             R.navigation.nav_movie
         }
+        R.id.menu_tv_show -> {
+            R.navigation.nav_tv
+        }
+        R.id.menu_trending -> {
+            R.navigation.nav_trending
+        }
+
         else -> {
             R.navigation.nav_movie
         }
@@ -51,6 +75,8 @@ class MainActivity : BaseActivity(),
 
     }
 
+    @FlowPreview
+    @ExperimentalCoroutinesApi
     override fun onReselectNavItem(navController: NavController, fragment: Fragment) {
         when(fragment){
             is MovieFragment -> {
@@ -61,6 +87,14 @@ class MainActivity : BaseActivity(),
             }
 
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when(item.itemId){
+            android.R.id.home -> onBackPressed()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
 

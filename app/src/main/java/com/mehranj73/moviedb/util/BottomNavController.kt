@@ -19,13 +19,6 @@ import com.mehranj73.moviedb.R
 import com.mehranj73.moviedb.util.BottomNavController.OnNavigationReselectedListener
 import kotlinx.android.parcel.Parcelize
 
-/**
- * Class credit: Allan Veloso
- * I took the concept from Allan Veloso and made alterations to fit our needs.
- * https://stackoverflow.com/questions/50577356/android-jetpack-navigation-bottomnavigationview-with-youtube-or-instagram-like#_=_
- * @property navigationBackStack: Backstack for the bottom navigation
- */
-
 
 class BottomNavController(
     val context: Context,
@@ -48,7 +41,9 @@ class BottomNavController(
     }
 
     fun setupBottomNavigationBackStack(previousBackStack: BackStack?) {
-        navigationBackStack = previousBackStack ?: BackStack.of(appStartDestinationId)
+        navigationBackStack = previousBackStack?.let {
+            it
+        } ?: BackStack.of(appStartDestinationId)
     }
 
     fun onNavigationItemSelected(itemId: Int = navigationBackStack.last()): Boolean {
@@ -196,3 +191,8 @@ fun BottomNavigationView.setUpNavigation(
         menu.findItem(itemId).isChecked = true
     }
 }
+
+
+
+
+

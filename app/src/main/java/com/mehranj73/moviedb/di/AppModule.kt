@@ -12,6 +12,8 @@ import com.mehranj73.moviedb.R
 import com.mehranj73.moviedb.data.local.AppDatabase
 import com.mehranj73.moviedb.data.local.MovieDao
 import com.mehranj73.moviedb.data.remote.RetrofitService
+import com.mehranj73.moviedb.data.repository.MovieRepository
+import com.mehranj73.moviedb.data.repository.MovieRepositoryImpl
 import com.mehranj73.moviedb.util.Constants
 import dagger.Module
 import dagger.Provides
@@ -87,6 +89,16 @@ object AppModule {
     fun provideGlideInstance(application: Application, requestOptions: RequestOptions): RequestManager {
         return Glide.with(application)
             .setDefaultRequestOptions(requestOptions)
+    }
+
+
+    @Singleton
+    @Provides
+    fun provideMovieRepository(
+         retrofitService: RetrofitService,
+         movieDao: MovieDao
+    ): MovieRepository{
+        return MovieRepositoryImpl(retrofitService, movieDao)
     }
 
 }

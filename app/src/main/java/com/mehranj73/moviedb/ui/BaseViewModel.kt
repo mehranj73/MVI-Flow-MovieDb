@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.mehranj73.moviedb.util.DataChannelManager
 import com.mehranj73.moviedb.util.DataState
 import com.mehranj73.moviedb.util.StateEvent
+import com.mehranj73.moviedb.util.StateMessage
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
@@ -29,6 +30,9 @@ import kotlinx.coroutines.flow.Flow
 
         val numActiveJobs: LiveData<Int> =
             dataChannelManager.numActiveJobs
+
+    val stateMessage: LiveData<StateMessage?>
+        get() = dataChannelManager.messageStack.stateMessage
 
 
     fun getMessageStackSize(): Int {

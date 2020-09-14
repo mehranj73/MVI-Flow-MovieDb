@@ -17,13 +17,13 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 
-
+@AndroidEntryPoint
 @FlowPreview
 @ExperimentalCoroutinesApi
 abstract class BaseMovieFragment(
     @LayoutRes
     private val layoutRes: Int
-): Fragment() {
+): Fragment(layoutRes) {
 
     private val TAG = "BaseMovieFragment"
 
@@ -33,7 +33,8 @@ abstract class BaseMovieFragment(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-       // setupActionBarWithNavController(R.id.f, activity as AppCompatActivity)
+       // setupActionBarWithNavController(R.id.movieFragment, activity as AppCompatActivity)
+        setupChannel()
     }
 
     private fun setupChannel() = viewModel.setupChannel()
