@@ -27,28 +27,28 @@ suspend fun <T> safeApiCall(
         try {
             // throws TimeoutCancellationException
             withTimeout(NETWORK_TIMEOUT){
-                ApiResult.Success(apiCall.invoke())
+                Success(apiCall.invoke())
             }
         } catch (throwable: Throwable) {
             throwable.printStackTrace()
             when (throwable) {
                 is TimeoutCancellationException -> {
                     val code = 408 // timeout error code
-                    ApiResult.GenericError(code, NETWORK_ERROR_TIMEOUT)
+                    GenericError(code, NETWORK_ERROR_TIMEOUT)
                 }
                 is IOException -> {
-                    ApiResult.NetworkError
+                    NetworkError
                 }
                 is HttpException -> {
                     val code = throwable.code()
                     val errorResponse = convertErrorBody(throwable)
-                    ApiResult.GenericError(
+                    GenericError(
                         code,
                         errorResponse
                     )
                 }
                 else -> {
-                    ApiResult.GenericError(
+                    GenericError(
                         null,
                         UNKNOWN_ERROR
                     )
