@@ -5,11 +5,8 @@
     android:layout_height="match_parent"
     tools:context=".ui.movie.MovieFragment">
 
-    <TextView
-        android:textSize="25sp"
-        android:gravity="center"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/movieRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="movie fragment" />
-
+        android:layout_height="match_parent" />
 </FrameLayout>

@@ -12,11 +12,14 @@ import com.bumptech.glide.RequestManager
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.mehranj73.moviedb.R
 import com.mehranj73.moviedb.data.model.Movie
+import com.mehranj73.moviedb.util.originalPosterUrl
+import com.mehranj73.moviedb.util.w154PosterUrl
 import com.mehranj73.moviedb.util.w500PosterUrl
+import com.mehranj73.moviedb.util.w92PosterUrl
 
-class NewsAdapter(
+class MovieAdapter(
     private val requestManager: RequestManager
-) : RecyclerView.Adapter<NewsAdapter.MovieViewHolder>() {
+) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
 
     inner class MovieViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
@@ -33,8 +36,8 @@ class NewsAdapter(
             overview.text = movie.overview
 
             requestManager
-                .load(movie.poster_path.w500PosterUrl())
-                .transition(withCrossFade())
+                .load(movie.poster_path.originalPosterUrl())
+                .thumbnail(requestManager.load(movie.poster_path.w92PosterUrl()))
                 .into(poster)
 
 
@@ -90,6 +93,19 @@ class NewsAdapter(
 
     fun setOnItemClickListener(listener: (Movie) -> Unit) {
         onItemClickListener = listener
+    }
+
+
+    fun preloadGlideImages(
+        requestManager: RequestManager,
+        list: List<Movie>
+    ){
+        for(movie in list){
+            requestManager
+                .load(movie.poster_path.originalPosterUrl())
+                .thumbnail(requestManager.load(movie.poster_path.w92PosterUrl()))
+                .preload()
+        }
     }
 
 }

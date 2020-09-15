@@ -1,7 +1,5 @@
 package com.mehranj73.moviedb.util
 
-
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import kotlinx.android.parcel.IgnoredOnParcel
