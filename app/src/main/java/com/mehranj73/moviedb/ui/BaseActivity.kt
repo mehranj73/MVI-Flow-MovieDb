@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.callbacks.onDismiss
+import com.mehranj73.moviedb.R
 import com.mehranj73.moviedb.util.Response
 import com.mehranj73.moviedb.util.StateMessageCallback
 import com.mehranj73.moviedb.util.UIComponentType
@@ -11,6 +14,9 @@ import com.mehranj73.moviedb.util.UIComponentType
 private const val TAG = "BaseActivity"
 
 abstract class BaseActivity : AppCompatActivity(), UICommunicationListener {
+
+    private var dialogInView: MaterialDialog? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,10 +37,10 @@ abstract class BaseActivity : AppCompatActivity(), UICommunicationListener {
             }
 
             is UIComponentType.Dialog -> {
-/*                displayDialog(
-                    response = response,
+               displayErrorDialog(
+                    message = response.message,
                     stateMessageCallback = stateMessageCallback
-                )*/
+                )
             }
 
             is UIComponentType.None -> {
@@ -50,5 +56,25 @@ abstract class BaseActivity : AppCompatActivity(), UICommunicationListener {
 
     override fun expandAppBar() {
 
+    }
+
+
+    private fun displayErrorDialog(
+        message: String?,
+        stateMessageCallback: StateMessageCallback
+    ): MaterialDialog {
+        return MaterialDialog(this)
+            .show{
+                title(R.string.text_error)
+                message(text = message)
+                positiveButton(R.string.text_ok){
+                    stateMessageCallback.removeMessageFromStack()
+                    dismiss()
+                }
+                onDismiss {
+                    dialogInView = null
+                }
+                cancelable(false)
+            }
     }
 }
