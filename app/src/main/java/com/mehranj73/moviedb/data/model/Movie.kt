@@ -11,7 +11,6 @@ data class Movie(
     @PrimaryKey(autoGenerate = false)
     val id: Int,
 
-    val original_language: String,
     val original_title: String,
     val overview: String,
     val popularity: Double,
@@ -19,5 +18,11 @@ data class Movie(
     val release_date: String,
     val title: String,
     val vote_average: Float,
-    val vote_count: Int
+    val vote_count: Int,
+
+    val budget: Int?,
+    val revenue: Int?,
+    val runtime: Int?,
+    val status: String?,
+
 )

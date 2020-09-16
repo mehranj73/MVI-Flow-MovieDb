@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="#e8e8e8"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -20,6 +21,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:background="#f3f9fb"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -38,6 +40,7 @@
                 app:srcCompat="@drawable/default_image" />
 
             <TextView
+                android:textSize="@dimen/movie_variable"
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -52,14 +55,16 @@
                 android:id="@+id/overview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="8dp"
                 android:text="overview: "
+                android:textSize="@dimen/movie_variable"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/poster_imageView"
                 app:layout_constraintTop_toBottomOf="@+id/poster_imageView" />
 
             <TextView
+                android:textSize="@dimen/movie_variable"
                 android:id="@+id/release_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -70,6 +75,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/title" />
 
             <TextView
+                android:textSize="@dimen/movie_variable"
                 android:id="@+id/vote_average"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -80,10 +86,12 @@
                 app:layout_constraintTop_toBottomOf="@+id/release_date" />
 
             <TextView
+                android:padding="4dp"
                 android:id="@+id/title_textView"
                 android:layout_width="194dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="16dp"
+                android:textSize="@dimen/movie_value"
                 app:layout_constraintBottom_toBottomOf="@+id/title"
                 app:layout_constraintStart_toEndOf="@+id/title"
                 app:layout_constraintTop_toTopOf="@+id/title"
@@ -93,7 +101,8 @@
                 android:id="@+id/release_date_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="16dp"
+                android:textSize="@dimen/movie_value"
                 app:layout_constraintBottom_toBottomOf="@+id/release_date"
                 app:layout_constraintStart_toEndOf="@+id/release_date"
                 app:layout_constraintTop_toTopOf="@+id/release_date"
@@ -103,7 +112,8 @@
                 android:id="@+id/vote_average_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="16dp"
+                android:textSize="@dimen/movie_value"
                 app:layout_constraintBottom_toBottomOf="@+id/vote_average"
                 app:layout_constraintStart_toEndOf="@+id/vote_average"
                 app:layout_constraintTop_toTopOf="@+id/vote_average"
@@ -117,6 +127,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/overview"

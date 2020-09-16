@@ -16,6 +16,14 @@ sealed class MovieStateEvent : StateEvent {
 
     }
 
+    object MovieDetailEvent: MovieStateEvent(){
+
+        override fun errorInfo(): String {
+            return "error returning movie detail"
+        }
+
+    }
+
     class None: MovieStateEvent(){
         override fun errorInfo(): String {
             return "None."
