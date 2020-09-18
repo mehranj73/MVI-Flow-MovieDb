@@ -5,7 +5,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import com.mehranj73.moviedb.data.model.Movie
 import com.mehranj73.moviedb.data.repository.MovieRepository
 import com.mehranj73.moviedb.ui.BaseViewModel
-import com.mehranj73.moviedb.ui.movie.state.MovieStateEvent
+
 import com.mehranj73.moviedb.ui.movie.state.MovieStateEvent.*
 import com.mehranj73.moviedb.ui.movie.state.MovieViewState
 import com.mehranj73.moviedb.util.*
