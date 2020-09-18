@@ -1,5 +1,6 @@
 package com.mehranj73.moviedb.data.repository
 
+import android.util.Log
 import com.mehranj73.moviedb.util.*
 import com.mehranj73.moviedb.util.ErrorHandling.Companion.NETWORK_ERROR
 import com.mehranj73.moviedb.util.ErrorHandling.Companion.UNKNOWN_ERROR
@@ -18,7 +19,7 @@ constructor(
     private val cacheCall: suspend () -> CacheObj?
 ) {
 
-    private val TAG: String = "AppDebug"
+    private  val TAG = "NetworkBoundResource"
 
     val result: Flow<DataState<ViewState>> = flow {
 

@@ -5,11 +5,14 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.request.RequestOptions
 import com.mehranj73.moviedb.R
+import com.mehranj73.moviedb.data.model.Movie
+import com.mehranj73.moviedb.ui.movie.MovieAdapter.Interaction
 import com.mehranj73.moviedb.ui.movie.state.MovieStateEvent
 import com.mehranj73.moviedb.util.StateMessageCallback
 import com.mehranj73.moviedb.util.TopSpacingItemDecoration
@@ -26,7 +29,7 @@ private const val TAG = "MovieFragment"
 @FlowPreview
 @AndroidEntryPoint
 class MovieFragment(
-) : BaseMovieFragment(R.layout.movie_fragment) {
+) : BaseMovieFragment(R.layout.movie_fragment), Interaction {
 
     private var requestManager: RequestManager? = null
 
@@ -52,6 +55,7 @@ class MovieFragment(
         setupGlide()
         initRecyclerView()
         subscribeObservers()
+
 
     }
 
@@ -109,7 +113,8 @@ class MovieFragment(
 
     private fun initRecyclerView() {
         movieAdapter = MovieAdapter(
-            requestManager as RequestManager
+            requestManager as RequestManager,
+            this
         )
         movieRecyclerView.apply {
             layoutManager = LinearLayoutManager(this@MovieFragment.context)
@@ -119,6 +124,12 @@ class MovieFragment(
             adapter = movieAdapter
         }
 
+    }
+
+    override fun onItemSelected(position: Int, item: Movie) {
+        viewModel.setMovieId(item.id)
+        Log.d(TAG, "onItemSelected: ${viewModel.getMovieId()}")
+        findNavController().navigate(R.id.action_movieFragment_to_movieDetailFragment)
     }
 
 

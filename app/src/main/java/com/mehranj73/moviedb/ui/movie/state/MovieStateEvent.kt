@@ -16,10 +16,14 @@ sealed class MovieStateEvent : StateEvent {
 
     }
 
-    object MovieDetailEvent: MovieStateEvent(){
+    object MovieDetailEvent : MovieStateEvent() {
 
         override fun errorInfo(): String {
             return "error returning movie detail"
+        }
+
+        override fun toString(): String {
+            return "MovieDetailEvent"
         }
 
     }

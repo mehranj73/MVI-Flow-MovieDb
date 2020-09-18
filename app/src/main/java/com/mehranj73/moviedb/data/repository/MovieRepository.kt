@@ -12,7 +12,7 @@ interface MovieRepository {
         stateEvent: StateEvent
     ): Flow<DataState<MovieViewState>>
 
-    fun getMovieId(
+    fun getMovieDetail(
         movieId: Int,
         stateEvent: StateEvent
     ): Flow<DataState<MovieViewState>>

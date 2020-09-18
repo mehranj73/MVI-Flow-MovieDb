@@ -1,11 +1,12 @@
 package com.mehranj73.moviedb.ui.movie
 
+import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.ViewModel
 import com.mehranj73.moviedb.data.model.Movie
 import com.mehranj73.moviedb.data.repository.MovieRepository
 import com.mehranj73.moviedb.ui.BaseViewModel
 import com.mehranj73.moviedb.ui.movie.state.MovieStateEvent
+import com.mehranj73.moviedb.ui.movie.state.MovieStateEvent.*
 import com.mehranj73.moviedb.ui.movie.state.MovieViewState
 import com.mehranj73.moviedb.util.*
 import com.mehranj73.moviedb.util.ErrorHandling.Companion.INVALID_STATE_EVENT
@@ -28,6 +29,15 @@ class MovieViewModel @ViewModelInject constructor(
 
             movies?.let {
                 setMoviesData(movies)
+
+            }
+
+
+        }
+
+        data.movieDetailFields.let { movieDetailFields ->
+            movieDetailFields.movie?.let {
+                setMovieDetail(it)
             }
 
 
@@ -38,19 +48,30 @@ class MovieViewModel @ViewModelInject constructor(
 
     override fun setStateEvent(stateEvent: StateEvent) {
 
-        val job: Flow<DataState<MovieViewState>> = when(stateEvent){
+        val job: Flow<DataState<MovieViewState>> = when (stateEvent) {
 
-                is MovieStateEvent -> {
-                    movieRepository.getNowPlaying(
-                        stateEvent = stateEvent
-                    )
+            is NowPlayingEvent -> {
+                Log.d("viewmodel", "NowPlayingEvent: ")
+                movieRepository.getNowPlaying(
+                    stateEvent = stateEvent
+                )
 
-                }
+            }
+
+            is MovieDetailEvent -> {
+                Log.d("viewmodel", "MovieDetailEvent: ${getMovieId()}")
+                movieRepository.getMovieDetail(
+                    stateEvent = stateEvent,
+                    movieId = getMovieId()
+
+                )
+            }
+
 
             else -> {
                 flow {
                     emit(
-                        DataState.error <MovieViewState>(
+                        DataState.error<MovieViewState>(
                             response = Response(
                                 message = INVALID_STATE_EVENT,
                                 uiComponentType = UIComponentType.Toast(),
@@ -67,15 +88,17 @@ class MovieViewModel @ViewModelInject constructor(
     }
 
 
-    fun setMoviesData(movies: List<Movie>){
+    private fun setMoviesData(movies: List<Movie>) {
         val update = getCurrentViewStateOrNew()
-        if(update.movies == movies){
-            return
-        }
         update.movies = movies
         setViewState(update)
     }
 
+    private fun setMovieDetail(movie: Movie) {
+        val update = getCurrentViewStateOrNew()
+        update.movieDetailFields.movie = movie
+        setViewState(update)
+    }
 
 
     override fun initNewViewState(): MovieViewState {
@@ -86,6 +109,19 @@ class MovieViewModel @ViewModelInject constructor(
     override fun onCleared() {
         super.onCleared()
         cancelActiveJobs()
+    }
+
+
+    fun getMovieId(): Int {
+        return getCurrentViewStateOrNew().movieDetailFields.movieId ?: 0
+    }
+
+    fun setMovieId(movieId: Int) {
+        val update = getCurrentViewStateOrNew()
+        val movieDetailFields = update.movieDetailFields
+        movieDetailFields.movieId = movieId
+        update.movieDetailFields = movieDetailFields
+        setViewState(update)
     }
 
 

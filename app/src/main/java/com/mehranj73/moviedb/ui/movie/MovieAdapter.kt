@@ -18,7 +18,8 @@ import com.mehranj73.moviedb.util.w500PosterUrl
 import com.mehranj73.moviedb.util.w92PosterUrl
 
 class MovieAdapter(
-    private val requestManager: RequestManager
+    private val requestManager: RequestManager,
+    private val interaction: Interaction? = null
 ) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
 
@@ -41,10 +42,8 @@ class MovieAdapter(
                 .into(poster)
 
 
-            itemView.setOnClickListener {
-                onItemClickListener?.let {
-                    it(movie)
-                }
+            poster.setOnClickListener {
+                interaction?.onItemSelected(adapterPosition, movie)
             }
 
 
@@ -88,11 +87,14 @@ class MovieAdapter(
 
     }
 
-    private var onItemClickListener: ((Movie) -> Unit)? = null
 
 
-    fun setOnItemClickListener(listener: (Movie) -> Unit) {
-        onItemClickListener = listener
+
+    interface Interaction {
+
+        fun onItemSelected(position: Int, item: Movie)
+
+
     }
 
 

@@ -1,5 +1,6 @@
 package com.mehranj73.moviedb.data.repository
 
+import android.util.Log
 import com.mehranj73.moviedb.data.local.MovieDao
 import com.mehranj73.moviedb.data.model.Movie
 import com.mehranj73.moviedb.data.model.MovieResponse
@@ -61,15 +62,17 @@ class MovieRepositoryImpl @Inject constructor(
 
         }.result
 
-    override fun getMovieId(movieId: Int, stateEvent: StateEvent):
+    override fun getMovieDetail(movieId: Int, stateEvent: StateEvent):
             Flow<DataState<MovieViewState>> =
         object : NetworkBoundResource<Movie, Movie, MovieViewState>(
             dispatcher = IO,
             stateEvent = stateEvent,
             apiCall = {
+                Log.d(TAG, "getMovieId: called")
                 retrofitService.getMovieDetail(movieId)
             },
             cacheCall = {
+                Log.d(TAG, "getMovieDetail: cachcall")
                 movieDao.getMovie(movieId)
             }
 
@@ -77,6 +80,7 @@ class MovieRepositoryImpl @Inject constructor(
 
 
             override suspend fun updateCache(networkObject: Movie) {
+
                 withContext(IO){
                     movieDao.insert(networkObject)
                 }
