@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
+import com.google.android.material.card.MaterialCardView
 import com.mehranj73.moviedb.R
 import com.mehranj73.moviedb.data.model.Movie
 import com.mehranj73.moviedb.util.originalPosterUrl
@@ -29,6 +30,7 @@ class MovieAdapter(
         private val voteAverage: TextView = itemView.findViewById(R.id.vote_average_textView)
         private val overview: TextView = itemView.findViewById(R.id.overview_textView)
         private var poster: ImageView = itemView.findViewById(R.id.poster_imageView)
+        private var cardView: MaterialCardView = itemView.findViewById(R.id.cardView)
 
         fun bind(movie: Movie){
             title.text = movie.title
@@ -42,7 +44,7 @@ class MovieAdapter(
                 .into(poster)
 
 
-            poster.setOnClickListener {
+            cardView.setOnClickListener {
                 interaction?.onItemSelected(adapterPosition, movie)
             }
 

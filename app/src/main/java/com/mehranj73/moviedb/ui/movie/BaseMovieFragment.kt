@@ -7,8 +7,8 @@ import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navGraphViewModels
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.mehranj73.moviedb.R
@@ -23,11 +23,16 @@ import kotlinx.coroutines.FlowPreview
 abstract class BaseMovieFragment(
     @LayoutRes
     private val layoutRes: Int
-): Fragment(layoutRes) {
+) : Fragment(layoutRes) {
 
     private val TAG = "BaseMovieFragment"
 
-    val viewModel: MovieViewModel by viewModels()
+
+    val viewModel: MovieViewModel by navGraphViewModels(R.id.movieFragment) {
+
+        defaultViewModelProviderFactory
+    }
+
 
     lateinit var uiCommunicationListener: UICommunicationListener
 
@@ -39,7 +44,7 @@ abstract class BaseMovieFragment(
 
     private fun setupChannel() = viewModel.setupChannel()
 
-    fun setupActionBarWithNavController(fragmentId: Int, activity: AppCompatActivity){
+    fun setupActionBarWithNavController(fragmentId: Int, activity: AppCompatActivity) {
         val appBarConfiguration = AppBarConfiguration(setOf(fragmentId))
         NavigationUI.setupActionBarWithNavController(
             activity,
@@ -49,13 +54,12 @@ abstract class BaseMovieFragment(
     }
 
 
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        try{
+        try {
             uiCommunicationListener = context as UICommunicationListener
-        }catch(e: ClassCastException){
-            Log.e(TAG, "$context must implement UICommunicationListener" )
+        } catch (e: ClassCastException) {
+            Log.e(TAG, "$context must implement UICommunicationListener")
         }
 
     }

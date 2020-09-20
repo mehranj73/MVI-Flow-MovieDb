@@ -68,11 +68,11 @@ class MovieRepositoryImpl @Inject constructor(
             dispatcher = IO,
             stateEvent = stateEvent,
             apiCall = {
-                Log.d(TAG, "getMovieId: called")
+
                 retrofitService.getMovieDetail(movieId)
             },
             cacheCall = {
-                Log.d(TAG, "getMovieDetail: cachcall")
+
                 movieDao.getMovie(movieId)
             }
 

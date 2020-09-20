@@ -28,7 +28,7 @@ sealed class MovieStateEvent : StateEvent {
 
     }
 
-    class None: MovieStateEvent(){
+    class None : MovieStateEvent() {
         override fun errorInfo(): String {
             return "None."
         }

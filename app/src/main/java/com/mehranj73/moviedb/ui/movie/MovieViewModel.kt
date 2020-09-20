@@ -2,11 +2,12 @@ package com.mehranj73.moviedb.ui.movie
 
 import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.MutableLiveData
 import com.mehranj73.moviedb.data.model.Movie
 import com.mehranj73.moviedb.data.repository.MovieRepository
 import com.mehranj73.moviedb.ui.BaseViewModel
-
-import com.mehranj73.moviedb.ui.movie.state.MovieStateEvent.*
+import com.mehranj73.moviedb.ui.movie.state.MovieStateEvent.MovieDetailEvent
+import com.mehranj73.moviedb.ui.movie.state.MovieStateEvent.NowPlayingEvent
 import com.mehranj73.moviedb.ui.movie.state.MovieViewState
 import com.mehranj73.moviedb.util.*
 import com.mehranj73.moviedb.util.ErrorHandling.Companion.INVALID_STATE_EVENT
@@ -22,17 +23,12 @@ class MovieViewModel @ViewModelInject constructor(
     val movieRepository: MovieRepository
 ) : BaseViewModel<MovieViewState>() {
 
-
     override fun handleNewData(data: MovieViewState) {
 
         data.movies.let { movies ->
-
             movies?.let {
-                setMoviesData(movies)
-
+                setMoviesData(it)
             }
-
-
         }
 
         data.movieDetailFields.let { movieDetailFields ->
@@ -51,7 +47,7 @@ class MovieViewModel @ViewModelInject constructor(
         val job: Flow<DataState<MovieViewState>> = when (stateEvent) {
 
             is NowPlayingEvent -> {
-                Log.d("viewmodel", "NowPlayingEvent: ")
+
                 movieRepository.getNowPlaying(
                     stateEvent = stateEvent
                 )
@@ -59,7 +55,6 @@ class MovieViewModel @ViewModelInject constructor(
             }
 
             is MovieDetailEvent -> {
-                Log.d("viewmodel", "MovieDetailEvent: ${getMovieId()}")
                 movieRepository.getMovieDetail(
                     stateEvent = stateEvent,
                     movieId = getMovieId()

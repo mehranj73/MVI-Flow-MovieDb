@@ -7,6 +7,7 @@
     android:layout_height="wrap_content">
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardView"
         android:layout_width="411dp"
         android:layout_height="wrap_content"
         android:checkable="true"

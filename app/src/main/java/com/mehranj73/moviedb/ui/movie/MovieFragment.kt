@@ -27,7 +27,6 @@ private const val TAG = "MovieFragment"
 
 @ExperimentalCoroutinesApi
 @FlowPreview
-@AndroidEntryPoint
 class MovieFragment(
 ) : BaseMovieFragment(R.layout.movie_fragment), Interaction {
 
@@ -41,7 +40,7 @@ class MovieFragment(
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d(TAG, "onCreate: called")
+
 
 
     }
@@ -50,11 +49,11 @@ class MovieFragment(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.setStateEvent(MovieStateEvent.NowPlayingEvent)
 
         setupGlide()
         initRecyclerView()
         subscribeObservers()
+        viewModel.setStateEvent(MovieStateEvent.NowPlayingEvent)
 
 
     }
@@ -73,6 +72,7 @@ class MovieFragment(
                     }
 
                     movieAdapter.differ.submitList(viewState.movies)
+
                 }
             }
 
@@ -88,7 +88,7 @@ class MovieFragment(
                         response = it.response,
                         stateMessageCallback = object : StateMessageCallback {
                             override fun removeMessageFromStack() {
-                                viewModel.clearStateMessage()
+                               viewModel.clearStateMessage()
                             }
                         }
                     )
@@ -128,9 +128,16 @@ class MovieFragment(
 
     override fun onItemSelected(position: Int, item: Movie) {
         viewModel.setMovieId(item.id)
-        Log.d(TAG, "onItemSelected: ${viewModel.getMovieId()}")
+
         findNavController().navigate(R.id.action_movieFragment_to_movieDetailFragment)
     }
 
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        // clear references (can leak memory)
+        movieRecyclerView.adapter = null
+        requestManager = null
+    }
 
 }

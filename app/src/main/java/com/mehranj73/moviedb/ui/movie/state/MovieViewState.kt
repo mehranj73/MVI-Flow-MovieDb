@@ -2,7 +2,7 @@ package com.mehranj73.moviedb.ui.movie.state
 
 import com.mehranj73.moviedb.data.model.Movie
 
-data class MovieViewState (
+data class MovieViewState(
     var movies: List<Movie>? = null,
     var movieDetailFields: MovieDetailFields = MovieDetailFields()
 
