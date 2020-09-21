@@ -26,9 +26,7 @@ constructor(
         // ****** STEP 1: VIEW CACHE ******
         emit(returnCache(markJobComplete = false))
 
-        // ****** STEP 2: MAKE NETWORK CALL, SAVE RESULT TO CACHE ******
-
-        when (val apiResult = safeApiCall(dispatcher) { apiCall.invoke() }) {
+        when (val apiResult = safeApiCall(dispatcher){apiCall.invoke()}) {
             is ApiResult.GenericError -> {
                 emit(
                     buildError<ViewState>(

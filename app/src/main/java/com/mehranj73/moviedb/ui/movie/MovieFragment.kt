@@ -17,7 +17,6 @@ import com.mehranj73.moviedb.ui.movie.MovieAdapter.Interaction
 import com.mehranj73.moviedb.ui.movie.state.MovieStateEvent
 import com.mehranj73.moviedb.util.StateMessageCallback
 import com.mehranj73.moviedb.util.TopSpacingItemDecoration
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.movie_fragment.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -63,32 +62,34 @@ class MovieFragment(
                             requestManager = requestManager as RequestManager,
                             list = it
                         )
+                        differ.submitList(it)
+                        Log.d(TAG, "subscribeObservers: differ")
                     }
-                    differ.submitList(viewState.movies)
-
                 }
             }
 
+        })
 
+        viewModel.numActiveJobs.observe(viewLifecycleOwner, {
+            uiCommunicationListener.displayProgressBar(viewModel.areAnyJobsActive())
 
-            viewModel.numActiveJobs.observe(viewLifecycleOwner, {
-                uiCommunicationListener.displayProgressBar(viewModel.areAnyJobsActive())
-            })
+        })
 
-            viewModel.stateMessage.observe(viewLifecycleOwner, Observer { stateMessage ->
-                stateMessage?.let {
-                    uiCommunicationListener.onResponseReceived(
-                        response = it.response,
-                        stateMessageCallback = object : StateMessageCallback {
-                            override fun removeMessageFromStack() {
-                               viewModel.clearStateMessage()
-                            }
+        viewModel.stateMessage.observe(viewLifecycleOwner, Observer { stateMessage ->
+            stateMessage?.let {
+                uiCommunicationListener.onResponseReceived(
+                    response = it.response,
+                    stateMessageCallback = object : StateMessageCallback {
+                        override fun removeMessageFromStack() {
+                            viewModel.clearStateMessage()
+                            Log.d(TAG, "removeMessageFromStack: ${it.response.message}")
+
                         }
-                    )
-                }
+                    }
+                )
+            }
 
 
-            })
         })
 
     }

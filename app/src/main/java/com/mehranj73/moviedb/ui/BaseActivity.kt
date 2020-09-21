@@ -62,7 +62,6 @@ abstract class BaseActivity : AppCompatActivity(), UICommunicationListener {
     ) {
         Log.d(TAG, "displayDialog: ")
         response.message?.let { message ->
-
             dialogInView = when (response.messageType) {
 
                 is MessageType.Error -> {
@@ -83,7 +82,7 @@ abstract class BaseActivity : AppCompatActivity(), UICommunicationListener {
 
     override fun onPause() {
         super.onPause()
-        if(dialogInView != null){
+        if (dialogInView != null) {
             (dialogInView as MaterialDialog).dismiss()
             dialogInView = null
         }

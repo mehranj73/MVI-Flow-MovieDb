@@ -41,40 +41,42 @@ class MovieViewModel @ViewModelInject constructor(
 
 
     override fun setStateEvent(stateEvent: StateEvent) {
+        if (!isJobAlreadyActive(stateEvent)) {
+            val job: Flow<DataState<MovieViewState>> = when (stateEvent) {
 
-        val job: Flow<DataState<MovieViewState>> = when (stateEvent) {
+                is NowPlayingEvent -> {
+                    movieRepository.getNowPlaying(
+                        stateEvent = stateEvent
+                    )
 
-            is NowPlayingEvent -> {
-                movieRepository.getNowPlaying(
-                    stateEvent = stateEvent
-                )
+                }
 
-            }
+                is MovieDetailEvent -> {
+                    movieRepository.getMovieDetail(
+                        stateEvent = stateEvent,
+                        movieId = getMovieId()
 
-            is MovieDetailEvent -> {
-                movieRepository.getMovieDetail(
-                    stateEvent = stateEvent,
-                    movieId = getMovieId()
-
-                )
-            }
-
-            else -> {
-                flow {
-                    emit(
-                        DataState.error<MovieViewState>(
-                            response = Response(
-                                message = INVALID_STATE_EVENT,
-                                uiComponentType = UIComponentType.Toast(),
-                                messageType = MessageType.Error()
-                            ),
-                            stateEvent = stateEvent
-                        )
                     )
                 }
+
+                else -> {
+                    flow {
+                        emit(
+                            DataState.error<MovieViewState>(
+                                response = Response(
+                                    message = INVALID_STATE_EVENT,
+                                    uiComponentType = UIComponentType.Toast(),
+                                    messageType = MessageType.Error()
+                                ),
+                                stateEvent = stateEvent
+                            )
+                        )
+                    }
+                }
             }
+            launchJob(stateEvent, job)
         }
-        launchJob(stateEvent, job)
+
 
     }
 

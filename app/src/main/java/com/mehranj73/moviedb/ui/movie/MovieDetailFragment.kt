@@ -47,23 +47,23 @@ class MovieDetailFragment(
                     setMovieDetail(it)
                 }
             }
+        })
 
-            viewModel.numActiveJobs.observe(viewLifecycleOwner, {
-                uiCommunicationListener.displayProgressBar(viewModel.areAnyJobsActive())
-            })
+        viewModel.numActiveJobs.observe(viewLifecycleOwner, {
+            uiCommunicationListener.displayProgressBar(viewModel.areAnyJobsActive())
+        })
 
-            viewModel.stateMessage.observe(viewLifecycleOwner, Observer { stateMessage ->
-                stateMessage?.let {
-                    uiCommunicationListener.onResponseReceived(
-                        response = it.response,
-                        stateMessageCallback = object : StateMessageCallback {
-                            override fun removeMessageFromStack() {
-                                viewModel.clearStateMessage()
-                            }
+        viewModel.stateMessage.observe(viewLifecycleOwner, Observer { stateMessage ->
+            stateMessage?.let {
+                uiCommunicationListener.onResponseReceived(
+                    response = it.response,
+                    stateMessageCallback = object : StateMessageCallback {
+                        override fun removeMessageFromStack() {
+                            viewModel.clearStateMessage()
                         }
-                    )
-                }
-            })
+                    }
+                )
+            }
         })
 
     }
