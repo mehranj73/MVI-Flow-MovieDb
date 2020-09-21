@@ -1,8 +1,8 @@
 package com.mehranj73.moviedb.ui.movie
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.bumptech.glide.RequestManager
 import com.mehranj73.moviedb.R
@@ -13,9 +13,6 @@ import com.mehranj73.moviedb.util.originalPosterUrl
 import com.mehranj73.moviedb.util.w154PosterUrl
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.movie_detail_fragment.*
-import kotlinx.android.synthetic.main.movie_detail_fragment.overview_textView
-import kotlinx.android.synthetic.main.movie_detail_fragment.poster_imageView
-import kotlinx.android.synthetic.main.movie_detail_fragment.title_textView
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import javax.inject.Inject
@@ -34,25 +31,22 @@ class MovieDetailFragment(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
+        (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(false)
+        setHasOptionsMenu(true)
+        viewModel.setStateEvent(MovieDetailEvent)
 
         subscribeObservers()
-        viewModel.setStateEvent(MovieDetailEvent)
 
     }
 
     private fun subscribeObservers() {
 
         viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
-            viewState.movieDetailFields.let { movieDetailFields ->
+            viewState?.movieDetailFields?.let { movieDetailFields ->
                 movieDetailFields.movie?.let {
                     setMovieDetail(it)
                 }
-
-
             }
-
 
             viewModel.numActiveJobs.observe(viewLifecycleOwner, {
                 uiCommunicationListener.displayProgressBar(viewModel.areAnyJobsActive())
@@ -69,18 +63,16 @@ class MovieDetailFragment(
                         }
                     )
                 }
-
-
             })
         })
 
     }
 
-    private fun setMovieDetail(movie: Movie){
+    private fun setMovieDetail(movie: Movie) {
         title_textView.text = movie.title
         score_textView.text = movie.vote_average.toString()
         overview_textView.text = movie.overview
-       // release_date_textView.text = movie.release_date
+        release_date_textView.text = movie.release_date
 
         requestManager
             .load(movie.poster_path.originalPosterUrl())
@@ -99,8 +91,6 @@ class MovieDetailFragment(
         movie.runtime?.let {
             runtime_textView.text = it.toString()
         }
-
-
 
 
     }

@@ -7,14 +7,17 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/poster_imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
+            android:cropToPadding="true"
+            android:scaleType="center"
+            app:layout_constraintBottom_toTopOf="@+id/title_textView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -72,7 +75,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="revenue"
+            android:text="revenue:"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/budget" />
@@ -82,7 +85,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="runtime"
+            android:text="runtime:"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/revenue"
             app:layout_constraintStart_toStartOf="@+id/status"
@@ -137,6 +140,17 @@
             app:layout_constraintStart_toEndOf="@+id/runtime"
             app:layout_constraintTop_toTopOf="@+id/runtime"
             tools:text="98" />
+
+        <TextView
+            android:id="@+id/release_date_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/score_textView"
+            app:layout_constraintStart_toStartOf="@+id/title_textView"
+            app:layout_constraintTop_toBottomOf="@+id/title_textView"
+            tools:text="2020-08-25" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

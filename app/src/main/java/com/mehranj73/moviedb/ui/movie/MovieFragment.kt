@@ -4,6 +4,7 @@ package com.mehranj73.moviedb.ui.movie
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -38,22 +39,15 @@ class MovieFragment(
     lateinit var requestOptions: RequestOptions
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-
-
-    }
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(false)
+        setHasOptionsMenu(true)
 
         setupGlide()
         initRecyclerView()
-        subscribeObservers()
         viewModel.setStateEvent(MovieStateEvent.NowPlayingEvent)
+        subscribeObservers()
 
 
     }
@@ -70,8 +64,7 @@ class MovieFragment(
                             list = it
                         )
                     }
-
-                    movieAdapter.differ.submitList(viewState.movies)
+                    differ.submitList(viewState.movies)
 
                 }
             }
@@ -128,7 +121,6 @@ class MovieFragment(
 
     override fun onItemSelected(position: Int, item: Movie) {
         viewModel.setMovieId(item.id)
-
         findNavController().navigate(R.id.action_movieFragment_to_movieDetailFragment)
     }
 

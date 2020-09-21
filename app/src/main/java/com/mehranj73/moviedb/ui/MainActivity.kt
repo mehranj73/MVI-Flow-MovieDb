@@ -6,6 +6,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import com.bumptech.glide.RequestManager
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.mehranj73.moviedb.R
 import com.mehranj73.moviedb.ui.movie.MovieDetailFragment
@@ -74,7 +75,7 @@ class MainActivity : BaseActivity(),
     }
 
     override fun onGraphChange() {
-
+        expandAppBar()
     }
 
     @FlowPreview
@@ -110,18 +111,16 @@ class MainActivity : BaseActivity(),
 
 
     override fun displayProgressBar(isLoading: Boolean) {
-        if(isLoading){
+        if (isLoading) {
             animation_progressBar.visibility = View.VISIBLE
-        }
-        else{
+        } else {
             animation_progressBar.visibility = View.GONE
         }
     }
 
     override fun expandAppBar() {
-
+        findViewById<AppBarLayout>(R.id.app_bar).setExpanded(true)
     }
-
 
     override fun onBackPressed() = bottomNavController.onBackPressed()
 }

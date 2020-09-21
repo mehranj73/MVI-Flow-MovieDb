@@ -12,7 +12,7 @@ abstract class CacheResponseHandler <ViewState, Data>(
             is CacheResult.GenericError -> {
                 DataState.error(
                     response = Response(
-                        message = "${stateEvent?.errorInfo()}\n\nReason: ${response.errorMessage}",
+                        message = "${stateEvent?.errorInfo()}\n\nReason: ${response.errorMessage.toString()}",
                         uiComponentType = UIComponentType.Dialog(),
                         messageType = MessageType.Error()
                     ),

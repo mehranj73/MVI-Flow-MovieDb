@@ -49,7 +49,7 @@ constructor(
                 )
             }
 
-            is ApiResult.Success -> {
+            is ApiResult.Success<*> -> {
                 if (apiResult.value == null) {
                     emit(
                         buildError<ViewState>(

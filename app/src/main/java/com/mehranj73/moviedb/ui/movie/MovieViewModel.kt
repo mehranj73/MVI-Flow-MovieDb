@@ -1,8 +1,6 @@
 package com.mehranj73.moviedb.ui.movie
 
-import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.MutableLiveData
 import com.mehranj73.moviedb.data.model.Movie
 import com.mehranj73.moviedb.data.repository.MovieRepository
 import com.mehranj73.moviedb.ui.BaseViewModel
@@ -47,7 +45,6 @@ class MovieViewModel @ViewModelInject constructor(
         val job: Flow<DataState<MovieViewState>> = when (stateEvent) {
 
             is NowPlayingEvent -> {
-
                 movieRepository.getNowPlaying(
                     stateEvent = stateEvent
                 )
@@ -61,7 +58,6 @@ class MovieViewModel @ViewModelInject constructor(
 
                 )
             }
-
 
             else -> {
                 flow {

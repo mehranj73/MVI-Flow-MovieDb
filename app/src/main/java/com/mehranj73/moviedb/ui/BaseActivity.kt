@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.callbacks.onDismiss
 import com.mehranj73.moviedb.R
+import com.mehranj73.moviedb.util.MessageType
 import com.mehranj73.moviedb.util.Response
 import com.mehranj73.moviedb.util.StateMessageCallback
 import com.mehranj73.moviedb.util.UIComponentType
@@ -37,10 +38,11 @@ abstract class BaseActivity : AppCompatActivity(), UICommunicationListener {
             }
 
             is UIComponentType.Dialog -> {
-               displayErrorDialog(
-                    message = response.message,
+                displayDialog(
+                    response = response,
                     stateMessageCallback = stateMessageCallback
                 )
+
             }
 
             is UIComponentType.None -> {
@@ -54,20 +56,48 @@ abstract class BaseActivity : AppCompatActivity(), UICommunicationListener {
 
     abstract override fun displayProgressBar(isLoading: Boolean)
 
-    override fun expandAppBar() {
+    private fun displayDialog(
+        response: Response,
+        stateMessageCallback: StateMessageCallback
+    ) {
+        Log.d(TAG, "displayDialog: ")
+        response.message?.let { message ->
 
+            dialogInView = when (response.messageType) {
+
+                is MessageType.Error -> {
+                    displayErrorDialog(
+                        message = message,
+                        stateMessageCallback = stateMessageCallback
+                    )
+                }
+
+                else -> {
+                    // do nothing
+                    stateMessageCallback.removeMessageFromStack()
+                    null
+                }
+            }
+        } ?: stateMessageCallback.removeMessageFromStack()
     }
 
+    override fun onPause() {
+        super.onPause()
+        if(dialogInView != null){
+            (dialogInView as MaterialDialog).dismiss()
+            dialogInView = null
+        }
+    }
 
     private fun displayErrorDialog(
         message: String?,
         stateMessageCallback: StateMessageCallback
     ): MaterialDialog {
         return MaterialDialog(this)
-            .show{
+            .show {
                 title(R.string.text_error)
                 message(text = message)
-                positiveButton(R.string.text_ok){
+                positiveButton(R.string.text_ok) {
                     stateMessageCallback.removeMessageFromStack()
                     dismiss()
                 }
