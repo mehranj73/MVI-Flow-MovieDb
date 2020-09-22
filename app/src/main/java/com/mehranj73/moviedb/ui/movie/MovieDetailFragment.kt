@@ -31,7 +31,7 @@ class MovieDetailFragment(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(false)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(true)
         setHasOptionsMenu(true)
         viewModel.setStateEvent(MovieDetailEvent)
 

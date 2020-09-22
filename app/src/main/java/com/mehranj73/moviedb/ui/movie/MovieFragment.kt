@@ -40,7 +40,7 @@ class MovieFragment(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(false)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(true)
         setHasOptionsMenu(true)
 
         setupGlide()

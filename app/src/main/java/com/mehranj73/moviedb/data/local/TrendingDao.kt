@@ -14,7 +14,7 @@ interface TrendingDao {
     suspend fun insert(trendingEntity: TrendingEntity): Long
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertList(trendingEntities: List<TrendingEntity>): Long
+    suspend fun insertList(trendingEntities: List<TrendingEntity>)
 
     @Query("SELECT * FROM trending_table")
     suspend fun getAllTrending(): List<TrendingEntity>

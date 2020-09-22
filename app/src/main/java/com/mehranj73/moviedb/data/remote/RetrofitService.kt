@@ -23,7 +23,7 @@ interface RetrofitService {
     ): MovieEntity
 
 
-    @GET("trending/person/")
+    @GET("trending/all/day")
     suspend fun getAllTrending(
         @Query("api_key") apiKey: String = API_KEY
     ): TrendingResponse
