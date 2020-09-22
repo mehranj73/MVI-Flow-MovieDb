@@ -1,6 +1,6 @@
 package com.mehranj73.moviedb.data.remote
 
-import com.mehranj73.moviedb.data.model.Movie
+import com.mehranj73.moviedb.data.model.MovieEntity
 import com.mehranj73.moviedb.data.model.MovieResponse
 import com.mehranj73.moviedb.util.Constants.API_KEY
 import retrofit2.http.GET
@@ -18,7 +18,7 @@ interface RetrofitService {
     suspend fun getMovieDetail(
         @Path("movie_id") movieId: Int,
         @Query("api_key") apiKey: String = API_KEY
-    ): Movie
+    ): MovieEntity
 
 
 

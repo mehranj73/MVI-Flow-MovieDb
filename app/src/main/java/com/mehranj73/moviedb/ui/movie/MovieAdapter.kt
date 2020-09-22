@@ -9,13 +9,10 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.google.android.material.card.MaterialCardView
 import com.mehranj73.moviedb.R
-import com.mehranj73.moviedb.data.model.Movie
+import com.mehranj73.moviedb.data.model.MovieEntity
 import com.mehranj73.moviedb.util.originalPosterUrl
-import com.mehranj73.moviedb.util.w154PosterUrl
-import com.mehranj73.moviedb.util.w500PosterUrl
 import com.mehranj73.moviedb.util.w92PosterUrl
 
 class MovieAdapter(
@@ -32,20 +29,20 @@ class MovieAdapter(
         private var poster: ImageView = itemView.findViewById(R.id.poster_imageView)
         private var cardView: MaterialCardView = itemView.findViewById(R.id.cardView)
 
-        fun bind(movie: Movie){
-            title.text = movie.title
-            releaseDate.text = movie.release_date
-            voteAverage.text = movie.vote_average.toString()
-            overview.text = movie.overview
+        fun bind(movieEntity: MovieEntity){
+            title.text = movieEntity.title
+            releaseDate.text = movieEntity.release_date
+            voteAverage.text = movieEntity.vote_average.toString()
+            overview.text = movieEntity.overview
 
             requestManager
-                .load(movie.poster_path.originalPosterUrl())
-                .thumbnail(requestManager.load(movie.poster_path.w92PosterUrl()))
+                .load(movieEntity.poster_path.originalPosterUrl())
+                .thumbnail(requestManager.load(movieEntity.poster_path.w92PosterUrl()))
                 .into(poster)
 
 
             cardView.setOnClickListener {
-                interaction?.onItemSelected(adapterPosition, movie)
+                interaction?.onItemSelected(adapterPosition, movieEntity)
             }
 
 
@@ -53,14 +50,14 @@ class MovieAdapter(
 
     }
 
-    private val differCallback = object : DiffUtil.ItemCallback<Movie>(){
+    private val differCallback = object : DiffUtil.ItemCallback<MovieEntity>(){
 
-        override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
+        override fun areItemsTheSame(oldItem: MovieEntity, newItem: MovieEntity): Boolean {
             return oldItem.id == newItem.id
 
         }
 
-        override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean {
+        override fun areContentsTheSame(oldItem: MovieEntity, newItem: MovieEntity): Boolean {
             return oldItem == newItem
         }
 
@@ -94,7 +91,7 @@ class MovieAdapter(
 
     interface Interaction {
 
-        fun onItemSelected(position: Int, item: Movie)
+        fun onItemSelected(position: Int, item: MovieEntity)
 
 
     }
@@ -102,7 +99,7 @@ class MovieAdapter(
 
     fun preloadGlideImages(
         requestManager: RequestManager,
-        list: List<Movie>
+        list: List<MovieEntity>
     ){
         for(movie in list){
             requestManager

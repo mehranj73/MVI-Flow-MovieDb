@@ -1,7 +1,7 @@
 package com.mehranj73.moviedb.ui.movie
 
 import androidx.hilt.lifecycle.ViewModelInject
-import com.mehranj73.moviedb.data.model.Movie
+import com.mehranj73.moviedb.data.model.MovieEntity
 import com.mehranj73.moviedb.data.repository.MovieRepository
 import com.mehranj73.moviedb.ui.BaseViewModel
 import com.mehranj73.moviedb.ui.movie.state.MovieStateEvent.MovieDetailEvent
@@ -30,7 +30,7 @@ class MovieViewModel @ViewModelInject constructor(
         }
 
         data.movieDetailFields.let { movieDetailFields ->
-            movieDetailFields.movie?.let {
+            movieDetailFields.movieEntity?.let {
                 setMovieDetail(it)
             }
 
@@ -81,15 +81,15 @@ class MovieViewModel @ViewModelInject constructor(
     }
 
 
-    private fun setMoviesData(movies: List<Movie>) {
+    private fun setMoviesData(movies: List<MovieEntity>) {
         val update = getCurrentViewStateOrNew()
         update.movies = movies
         setViewState(update)
     }
 
-    private fun setMovieDetail(movie: Movie) {
+    private fun setMovieDetail(movieEntity: MovieEntity) {
         val update = getCurrentViewStateOrNew()
-        update.movieDetailFields.movie = movie
+        update.movieDetailFields.movieEntity = movieEntity
         setViewState(update)
     }
 

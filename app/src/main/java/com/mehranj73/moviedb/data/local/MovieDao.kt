@@ -5,25 +5,25 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
-import com.mehranj73.moviedb.data.model.Movie
+import com.mehranj73.moviedb.data.model.MovieEntity
 
 @Dao
 interface MovieDao {
 
     @Insert(onConflict = REPLACE)
-    suspend fun insert(movie: Movie): Long
+    suspend fun insert(movieEntity: MovieEntity): Long
 
     @Insert(onConflict = REPLACE)
-    suspend fun insertList(movies: List<Movie>)
+    suspend fun insertList(movies: List<MovieEntity>)
 
     @Delete
-    suspend fun delete(movie: Movie)
+    suspend fun delete(movieEntity: MovieEntity)
 
     @Query("SELECT * FROM movie_table")
-    suspend fun getMovies(): List<Movie>
+    suspend fun getMovies(): List<MovieEntity>
 
     @Query("SELECT * FROM movie_table WHERE id= :movieId")
-    suspend fun getMovie(movieId: Int): Movie
+    suspend fun getMovie(movieId: Int): MovieEntity
 
     @Query(
         """

@@ -12,7 +12,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.request.RequestOptions
 import com.mehranj73.moviedb.R
-import com.mehranj73.moviedb.data.model.Movie
+import com.mehranj73.moviedb.data.model.MovieEntity
 import com.mehranj73.moviedb.ui.movie.MovieAdapter.Interaction
 import com.mehranj73.moviedb.ui.movie.state.MovieStateEvent
 import com.mehranj73.moviedb.util.StateMessageCallback
@@ -120,7 +120,7 @@ class MovieFragment(
 
     }
 
-    override fun onItemSelected(position: Int, item: Movie) {
+    override fun onItemSelected(position: Int, item: MovieEntity) {
         viewModel.setMovieId(item.id)
         findNavController().navigate(R.id.action_movieFragment_to_movieDetailFragment)
     }

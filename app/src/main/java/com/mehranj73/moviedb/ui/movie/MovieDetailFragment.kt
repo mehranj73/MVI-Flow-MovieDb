@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.bumptech.glide.RequestManager
 import com.mehranj73.moviedb.R
-import com.mehranj73.moviedb.data.model.Movie
+import com.mehranj73.moviedb.data.model.MovieEntity
 import com.mehranj73.moviedb.ui.movie.state.MovieStateEvent.MovieDetailEvent
 import com.mehranj73.moviedb.util.StateMessageCallback
 import com.mehranj73.moviedb.util.originalPosterUrl
@@ -43,7 +43,7 @@ class MovieDetailFragment(
 
         viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
             viewState?.movieDetailFields?.let { movieDetailFields ->
-                movieDetailFields.movie?.let {
+                movieDetailFields.movieEntity?.let {
                     setMovieDetail(it)
                 }
             }
@@ -68,27 +68,27 @@ class MovieDetailFragment(
 
     }
 
-    private fun setMovieDetail(movie: Movie) {
-        title_textView.text = movie.title
-        score_textView.text = movie.vote_average.toString()
-        overview_textView.text = movie.overview
-        release_date_textView.text = movie.release_date
+    private fun setMovieDetail(movieEntity: MovieEntity) {
+        title_textView.text = movieEntity.title
+        score_textView.text = movieEntity.vote_average.toString()
+        overview_textView.text = movieEntity.overview
+        release_date_textView.text = movieEntity.release_date
 
         requestManager
-            .load(movie.poster_path.originalPosterUrl())
-            .thumbnail(requestManager.load(movie.poster_path.w154PosterUrl()))
+            .load(movieEntity.poster_path.originalPosterUrl())
+            .thumbnail(requestManager.load(movieEntity.poster_path.w154PosterUrl()))
             .into(poster_imageView)
 
-        movie.revenue?.let {
+        movieEntity.revenue?.let {
             revenu_textView.text = it.toString()
         }
-        movie.budget?.let {
+        movieEntity.budget?.let {
             budget_textView.text = it.toString()
         }
-        movie.status?.let {
+        movieEntity.status?.let {
             revenu_textView.text = it
         }
-        movie.runtime?.let {
+        movieEntity.runtime?.let {
             runtime_textView.text = it.toString()
         }
 

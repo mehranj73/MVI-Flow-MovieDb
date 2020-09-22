@@ -1,8 +1,7 @@
 package com.mehranj73.moviedb.data.repository
 
-import android.util.Log
 import com.mehranj73.moviedb.data.local.MovieDao
-import com.mehranj73.moviedb.data.model.Movie
+import com.mehranj73.moviedb.data.model.MovieEntity
 import com.mehranj73.moviedb.data.model.MovieResponse
 import com.mehranj73.moviedb.data.remote.RetrofitService
 import com.mehranj73.moviedb.ui.movie.state.MovieViewState
@@ -28,7 +27,7 @@ class MovieRepositoryImpl @Inject constructor(
     override fun getNowPlaying(
         stateEvent: StateEvent
     ): Flow<DataState<MovieViewState>> =
-        object : NetworkBoundResource<MovieResponse, List<Movie>, MovieViewState>(
+        object : NetworkBoundResource<MovieResponse, List<MovieEntity>, MovieViewState>(
             dispatcher = IO,
             stateEvent = stateEvent,
             apiCall = {
@@ -50,7 +49,7 @@ class MovieRepositoryImpl @Inject constructor(
 
             }
 
-            override fun handleCacheSuccess(resultObj: List<Movie>): DataState<MovieViewState> {
+            override fun handleCacheSuccess(resultObj: List<MovieEntity>): DataState<MovieViewState> {
                 return DataState.data(
                     response = null,
                     data = MovieViewState(
@@ -64,7 +63,7 @@ class MovieRepositoryImpl @Inject constructor(
 
     override fun getMovieDetail(movieId: Int, stateEvent: StateEvent):
             Flow<DataState<MovieViewState>> =
-        object : NetworkBoundResource<Movie, Movie, MovieViewState>(
+        object : NetworkBoundResource<MovieEntity, MovieEntity, MovieViewState>(
             dispatcher = IO,
             stateEvent = stateEvent,
             apiCall = {
@@ -79,19 +78,19 @@ class MovieRepositoryImpl @Inject constructor(
         ) {
 
 
-            override suspend fun updateCache(networkObject: Movie) {
+            override suspend fun updateCache(networkObject: MovieEntity) {
 
                 withContext(IO){
                     movieDao.insert(networkObject)
                 }
             }
 
-            override fun handleCacheSuccess(resultObj: Movie): DataState<MovieViewState> {
+            override fun handleCacheSuccess(resultObj: MovieEntity): DataState<MovieViewState> {
                 return DataState.data(
                     response = null,
                     data = MovieViewState(
                         movieDetailFields = MovieDetailFields(
-                            movie = resultObj,
+                            movieEntity = resultObj,
                             movieId = movieId
                         )
                     ),
