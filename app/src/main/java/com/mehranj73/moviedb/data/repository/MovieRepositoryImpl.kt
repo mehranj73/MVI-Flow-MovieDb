@@ -2,7 +2,7 @@ package com.mehranj73.moviedb.data.repository
 
 import com.mehranj73.moviedb.data.local.MovieDao
 import com.mehranj73.moviedb.data.model.MovieEntity
-import com.mehranj73.moviedb.data.model.MovieResponse
+import com.mehranj73.moviedb.data.remote.response.MovieResponse
 import com.mehranj73.moviedb.data.remote.RetrofitService
 import com.mehranj73.moviedb.ui.movie.state.MovieViewState
 import com.mehranj73.moviedb.ui.movie.state.MovieViewState.MovieDetailFields

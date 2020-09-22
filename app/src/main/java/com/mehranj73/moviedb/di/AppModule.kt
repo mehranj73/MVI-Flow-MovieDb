@@ -11,6 +11,7 @@ import com.google.gson.GsonBuilder
 import com.mehranj73.moviedb.R
 import com.mehranj73.moviedb.data.local.AppDatabase
 import com.mehranj73.moviedb.data.local.MovieDao
+import com.mehranj73.moviedb.data.local.TrendingDao
 import com.mehranj73.moviedb.data.remote.RetrofitService
 import com.mehranj73.moviedb.data.repository.MovieRepository
 import com.mehranj73.moviedb.data.repository.MovieRepositoryImpl
@@ -45,8 +46,14 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideBlogDao(appDatabase: AppDatabase): MovieDao {
+    fun provideMovieDao(appDatabase: AppDatabase): MovieDao {
         return appDatabase.movieDao()
+    }
+
+    @Singleton
+    @Provides
+    fun provideTrendingDao(appDatabase: AppDatabase): TrendingDao {
+        return appDatabase.trendingDao()
     }
 
     @Singleton

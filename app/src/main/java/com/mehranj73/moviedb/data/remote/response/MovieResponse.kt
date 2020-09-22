@@ -1,5 +1,6 @@
-package com.mehranj73.moviedb.data.model
+package com.mehranj73.moviedb.data.remote.response
 
+import com.mehranj73.moviedb.data.model.MovieEntity
 
 
 data class MovieResponse(
