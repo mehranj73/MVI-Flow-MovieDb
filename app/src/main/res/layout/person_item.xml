@@ -8,7 +8,7 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardView"
-        android:layout_width="411dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:checkable="true"
         android:clickable="true"
@@ -22,9 +22,9 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:background="#f3f9fb"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="#f3f9fb">
 
             <ImageView
                 android:id="@+id/profile_imageView"
@@ -75,11 +75,11 @@
                 app:layout_constraintTop_toBottomOf="@+id/known_for_department" />
 
             <TextView
-                android:padding="4dp"
                 android:id="@+id/name_textView"
                 android:layout_width="194dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:padding="4dp"
                 android:textSize="@dimen/movie_value"
                 app:layout_constraintBottom_toBottomOf="@+id/name"
                 app:layout_constraintStart_toEndOf="@+id/name"

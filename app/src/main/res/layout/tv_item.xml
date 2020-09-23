@@ -8,7 +8,7 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardView"
-        android:layout_width="411dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:checkable="true"
         android:clickable="true"
@@ -22,9 +22,9 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:background="#f3f9fb"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="#f3f9fb">
 
             <ImageView
                 android:id="@+id/poster_imageView"
@@ -41,13 +41,13 @@
                 app:srcCompat="@drawable/default_image" />
 
             <TextView
-                android:textSize="@dimen/movie_variable"
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:text="title: "
+                android:textSize="@dimen/movie_variable"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/poster_imageView"
                 app:layout_constraintTop_toTopOf="@+id/poster_imageView" />
@@ -76,22 +76,22 @@
                 app:layout_constraintTop_toBottomOf="@+id/title" />
 
             <TextView
-                android:textSize="@dimen/movie_variable"
                 android:id="@+id/vote_average"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:text="vote average:"
+                android:textSize="@dimen/movie_variable"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/first_air_date"
                 app:layout_constraintTop_toBottomOf="@+id/first_air_date" />
 
             <TextView
-                android:padding="4dp"
                 android:id="@+id/name_textView"
                 android:layout_width="194dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:padding="4dp"
                 android:textSize="@dimen/movie_value"
                 app:layout_constraintBottom_toBottomOf="@+id/title"
                 app:layout_constraintStart_toEndOf="@+id/title"
