@@ -88,12 +88,13 @@
 
             <TextView
                 android:id="@+id/title_textView"
-                android:layout_width="194dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:layout_marginEnd="8dp"
                 android:padding="4dp"
                 android:textSize="@dimen/movie_value"
-                app:layout_constraintBottom_toBottomOf="@+id/title"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/title"
                 app:layout_constraintTop_toTopOf="@+id/title"
                 tools:text="Mulan" />
@@ -102,11 +103,14 @@
                 android:id="@+id/release_date_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="8dp"
                 android:textSize="@dimen/movie_value"
                 app:layout_constraintBottom_toBottomOf="@+id/release_date"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.062"
                 app:layout_constraintStart_toEndOf="@+id/release_date"
                 app:layout_constraintTop_toTopOf="@+id/release_date"
+                app:layout_constraintVertical_bias="1.0"
                 tools:text="2020-08-28" />
 
             <TextView
@@ -122,7 +126,7 @@
 
             <TextView
                 android:id="@+id/overview_textView"
-                android:layout_width="379dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
 
                 android:layout_marginStart="8dp"
