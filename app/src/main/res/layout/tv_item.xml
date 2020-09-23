@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#e8e8e8"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardView"
+        android:layout_width="411dp"
+        android:layout_height="wrap_content"
+        android:checkable="true"
+        android:clickable="true"
+        android:elevation="5dp"
+        android:focusable="true"
+        app:cardBackgroundColor="#fffafa"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:background="#f3f9fb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/poster_imageView"
+                android:layout_width="116dp"
+                android:layout_height="175dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:adjustViewBounds="true"
+                android:cropToPadding="false"
+                android:elevation="6dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/default_image" />
+
+            <TextView
+                android:textSize="@dimen/movie_variable"
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="title: "
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/poster_imageView"
+                app:layout_constraintTop_toTopOf="@+id/poster_imageView" />
+
+            <TextView
+                android:id="@+id/overview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="8dp"
+                android:text="overview: "
+                android:textSize="@dimen/movie_variable"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/poster_imageView"
+                app:layout_constraintTop_toBottomOf="@+id/poster_imageView" />
+
+            <TextView
+                android:id="@+id/first_air_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="first air date:"
+                android:textSize="@dimen/movie_variable"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/title"
+                app:layout_constraintTop_toBottomOf="@+id/title" />
+
+            <TextView
+                android:textSize="@dimen/movie_variable"
+                android:id="@+id/vote_average"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="vote average:"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/first_air_date"
+                app:layout_constraintTop_toBottomOf="@+id/first_air_date" />
+
+            <TextView
+                android:padding="4dp"
+                android:id="@+id/name_textView"
+                android:layout_width="194dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:textSize="@dimen/movie_value"
+                app:layout_constraintBottom_toBottomOf="@+id/title"
+                app:layout_constraintStart_toEndOf="@+id/title"
+                app:layout_constraintTop_toTopOf="@+id/title"
+                tools:text="Mulan" />
+
+            <TextView
+                android:id="@+id/first_air_date_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:textSize="@dimen/movie_value"
+                app:layout_constraintBottom_toBottomOf="@+id/first_air_date"
+                app:layout_constraintStart_toEndOf="@+id/first_air_date"
+                app:layout_constraintTop_toTopOf="@+id/first_air_date"
+                tools:text="2020-08-28" />
+
+            <TextView
+                android:id="@+id/vote_average_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:textSize="@dimen/movie_value"
+                app:layout_constraintBottom_toBottomOf="@+id/vote_average"
+                app:layout_constraintStart_toEndOf="@+id/vote_average"
+                app:layout_constraintTop_toTopOf="@+id/vote_average"
+                tools:text="5.7" />
+
+            <TextView
+                android:id="@+id/overview_textView"
+                android:layout_width="379dp"
+                android:layout_height="wrap_content"
+
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/overview"
+                app:layout_constraintTop_toBottomOf="@+id/overview"
+                tools:text="Two brothers — one a narcotics agent and the other a general — finally discover the identity of the drug lord who murdered their parents decades ago. They may kill each other before capturing the bad guys." />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

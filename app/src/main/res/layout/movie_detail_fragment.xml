@@ -10,21 +10,21 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/poster_imageView"
+            android:id="@+id/profile_imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:adjustViewBounds="true"
             android:cropToPadding="true"
             android:scaleType="center"
-            app:layout_constraintBottom_toTopOf="@+id/title_textView"
+            app:layout_constraintBottom_toTopOf="@+id/name_textView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/default_image" />
 
         <TextView
-            android:id="@+id/title_textView"
+            android:id="@+id/name_textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -32,7 +32,7 @@
             android:textSize="24sp"
             app:layout_constraintEnd_toStartOf="@+id/score_textView"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/poster_imageView"
+            app:layout_constraintTop_toBottomOf="@+id/profile_imageView"
             tools:text="Money Plane" />
 
         <TextView
@@ -43,7 +43,7 @@
             android:layout_marginEnd="36dp"
             android:textSize="86sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/poster_imageView"
+            app:layout_constraintTop_toBottomOf="@+id/profile_imageView"
             tools:text="5.2" />
 
         <TextView
@@ -142,14 +142,14 @@
             tools:text="98" />
 
         <TextView
-            android:id="@+id/release_date_textView"
+            android:id="@+id/first_air_date_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="@+id/score_textView"
-            app:layout_constraintStart_toStartOf="@+id/title_textView"
-            app:layout_constraintTop_toBottomOf="@+id/title_textView"
+            app:layout_constraintStart_toStartOf="@+id/name_textView"
+            app:layout_constraintTop_toBottomOf="@+id/name_textView"
             tools:text="2020-08-25" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

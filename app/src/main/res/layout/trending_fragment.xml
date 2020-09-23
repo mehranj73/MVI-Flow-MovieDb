@@ -5,11 +5,9 @@
     android:layout_height="match_parent"
     tools:context=".ui.trending.TrendingFragment">
 
-    <TextView
-        android:gravity="center"
-        android:textSize="30sp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="trending fragment" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/trendingRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </FrameLayout>

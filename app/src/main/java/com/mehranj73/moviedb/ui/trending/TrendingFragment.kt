@@ -1,22 +1,23 @@
 package com.mehranj73.moviedb.ui.trending
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.request.RequestOptions
 import com.mehranj73.moviedb.R
 import com.mehranj73.moviedb.ui.movie.MovieAdapter
-import com.mehranj73.moviedb.ui.trending.state.TrendingStateEvent
 import com.mehranj73.moviedb.ui.trending.state.TrendingStateEvent.GetAllTrending
 import com.mehranj73.moviedb.util.StateMessageCallback
+import com.mehranj73.moviedb.util.TopSpacingItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.movie_fragment.*
+import kotlinx.android.synthetic.main.movie_fragment.movieRecyclerView
+import kotlinx.android.synthetic.main.trending_fragment.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import javax.inject.Inject
@@ -32,7 +33,7 @@ class TrendingFragment(
 
     private var requestManager: RequestManager? = null
 
-    private lateinit var movieAdapter: MovieAdapter
+    private lateinit var trendingAdapter: TrendingAdapter
 
     @Inject
     lateinit var requestOptions: RequestOptions
@@ -42,6 +43,8 @@ class TrendingFragment(
         super.onViewCreated(view, savedInstanceState)
         (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(true)
         viewModel.setStateEvent(GetAllTrending)
+        setupGlide()
+        initRecyclerView()
         subscribeObservers()
 
     }
@@ -51,11 +54,19 @@ class TrendingFragment(
         viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
             if (viewState != null) {
                 viewState.allTrending?.let {
-                    Log.d(TAG, "subscribeObservers: ${it}")
+                    trendingAdapter.apply {
+                            preloadGlideImages(
+                                requestManager = requestManager as RequestManager,
+                                list = it
+                            )
+                            differ.submitList(it)
+
+                        }
+                    }
                 }
             }
 
-        })
+        )
 
         viewModel.numActiveJobs.observe(viewLifecycleOwner, {
             uiCommunicationListener.displayProgressBar(viewModel.areAnyJobsActive())
@@ -78,6 +89,31 @@ class TrendingFragment(
 
 
         })
+
+    }
+
+    private fun setupGlide() {
+        val requestOptions = RequestOptions
+            .placeholderOf(R.drawable.default_image)
+            .error(R.drawable.default_image)
+
+        activity?.let {
+            requestManager = Glide.with(it)
+                .applyDefaultRequestOptions(requestOptions)
+        }
+    }
+
+    private fun initRecyclerView() {
+        trendingAdapter = TrendingAdapter(
+            requestManager as RequestManager
+        )
+        trendingRecyclerView.apply {
+            layoutManager = LinearLayoutManager(this@TrendingFragment.context)
+            val topSpacingItemDecoration = TopSpacingItemDecoration(30)
+            removeItemDecoration(topSpacingItemDecoration)
+            addItemDecoration(topSpacingItemDecoration)
+            adapter = trendingAdapter
+        }
 
     }
 

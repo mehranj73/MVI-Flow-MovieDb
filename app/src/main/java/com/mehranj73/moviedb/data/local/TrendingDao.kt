@@ -18,4 +18,7 @@ interface TrendingDao {
 
     @Query("SELECT * FROM trending_table")
     suspend fun getAllTrending(): List<TrendingEntity>
+
+    @Query("DELETE FROM trending_table")
+    suspend fun nukeTrendingTable()
 }

@@ -69,15 +69,15 @@ class MovieDetailFragment(
     }
 
     private fun setMovieDetail(movieEntity: MovieEntity) {
-        title_textView.text = movieEntity.title
+        name_textView.text = movieEntity.title
         score_textView.text = movieEntity.vote_average.toString()
         overview_textView.text = movieEntity.overview
-        release_date_textView.text = movieEntity.release_date
+        first_air_date_textView.text = movieEntity.release_date
 
         requestManager
             .load(movieEntity.poster_path.originalPosterUrl())
             .thumbnail(requestManager.load(movieEntity.poster_path.w154PosterUrl()))
-            .into(poster_imageView)
+            .into(profile_imageView)
 
         movieEntity.revenue?.let {
             revenu_textView.text = it.toString()
