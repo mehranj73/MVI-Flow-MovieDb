@@ -117,11 +117,5 @@ class TrendingFragment(
 
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        // clear references (can leak memory)
-        trendingRecyclerView.adapter = null
-        requestManager = null
-    }
 
 }

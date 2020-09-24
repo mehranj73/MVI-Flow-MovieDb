@@ -21,10 +21,7 @@ class MovieAdapter(
 ) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
 
-    inner class MovieViewHolder(
-        itemView: View,
-        val requestManager: RequestManager
-    ): RecyclerView.ViewHolder(itemView) {
+    inner class MovieViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         private val title: TextView = itemView.findViewById(R.id.title_textView)
         private val releaseDate: TextView = itemView.findViewById(R.id.release_date_textView)
         private val voteAverage: TextView = itemView.findViewById(R.id.vote_average_textView)
@@ -75,8 +72,7 @@ class MovieAdapter(
                 R.layout.movie_item,
                 parent,
                 false
-            ),
-            requestManager
+            )
         )
     }
 

@@ -38,11 +38,8 @@ class TrendingRepositoryImpl @Inject constructor(
 
             override suspend fun updateCache(networkObject: TrendingResponse) {
                 withContext(IO) {
-                   if (!networkObject.results.isNullOrEmpty()){
-                       trendingDao.nukeTrendingTable()
-                       trendingDao.insertList(networkObject.results)
-                   }
-
+                    trendingDao.nukeTrendingTable()
+                    trendingDao.insertList(networkObject.results)
 
                 }
             }
