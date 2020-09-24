@@ -48,7 +48,7 @@ class TrendingAdapter(
         }
 
     }
-    inner class PersonViewHolder(itemView: View, requestManager: RequestManager) :
+    inner class PersonViewHolder(itemView: View, val requestManager: RequestManager) :
         RecyclerView.ViewHolder(itemView) {
         private val name: TextView = itemView.findViewById(R.id.name_textView)
         private val gender: TextView = itemView.findViewById(R.id.gender_textView)
@@ -79,7 +79,7 @@ class TrendingAdapter(
 
     }
 
-    inner class TvViewHolder(itemView: View, requestManager: RequestManager) :
+    inner class TvViewHolder(itemView: View, val requestManager: RequestManager) :
         RecyclerView.ViewHolder(itemView) {
         private val name: TextView = itemView.findViewById(R.id.name_textView)
         private val voteAverage: TextView = itemView.findViewById(R.id.vote_average_textView)
