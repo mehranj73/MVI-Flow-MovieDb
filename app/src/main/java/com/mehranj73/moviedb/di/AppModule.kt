@@ -37,56 +37,6 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideBlogDb(@ApplicationContext context: Context): AppDatabase {
-        return Room
-            .databaseBuilder(
-                context,
-                AppDatabase::class.java,
-                AppDatabase.DATABASE_NAME
-            )
-            .fallbackToDestructiveMigration()
-            .build()
-    }
-
-    @Singleton
-    @Provides
-    fun provideMovieDao(appDatabase: AppDatabase): MovieDao {
-        return appDatabase.movieDao()
-    }
-
-    @Singleton
-    @Provides
-    fun provideTrendingDao(appDatabase: AppDatabase): TrendingDao {
-        return appDatabase.trendingDao()
-    }
-
-    @Singleton
-    @Provides
-    fun provideGsonBuilder(): Gson {
-        return GsonBuilder().create()
-    }
-
-    @Provides
-    fun provideBaseUrl() = Constants.BASE_URL
-
-    @Singleton
-    @Provides
-    fun provideRetrofit(gson: Gson, baseUrl: String): Retrofit.Builder {
-        return Retrofit.Builder()
-            .baseUrl(baseUrl)
-            .addConverterFactory(GsonConverterFactory.create(gson))
-    }
-
-    @Singleton
-    @Provides
-    fun provideRetrofitService(retrofit: Retrofit.Builder): RetrofitService {
-        return retrofit
-            .build()
-            .create(RetrofitService::class.java)
-    }
-
-    @Singleton
-    @Provides
     fun provideRequestOptions(): RequestOptions {
         return RequestOptions
             .placeholderOf(R.drawable.default_image)
@@ -101,22 +51,6 @@ object AppModule {
     }
 
 
-    @Singleton
-    @Provides
-    fun provideMovieRepository(
-         retrofitService: RetrofitService,
-         movieDao: MovieDao
-    ): MovieRepository{
-        return MovieRepositoryImpl(retrofitService, movieDao)
-    }
 
-    @Singleton
-    @Provides
-    fun provideTrendingRepository(
-         retrofitService: RetrofitService,
-         trendingDao: TrendingDao
-    ): TrendingRepository{
-        return TrendingRepositoryImpl(retrofitService, trendingDao)
-    }
 
 }
