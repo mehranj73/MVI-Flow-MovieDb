@@ -1,6 +1,5 @@
 package com.mehranj73.moviedb.data.repository
 
-import com.mehranj73.moviedb.ui.movie.state.MovieViewState
 import com.mehranj73.moviedb.ui.tv_show.state.TvViewState
 import com.mehranj73.moviedb.util.DataState
 import com.mehranj73.moviedb.util.StateEvent
@@ -10,5 +9,11 @@ interface TvRepository {
 
     fun getTvAiringToday(
         stateEvent: StateEvent
-    ):Flow<DataState<TvViewState>>
+    ): Flow<DataState<TvViewState>>
+
+
+    fun getTvDetail(
+        tvId: Int,
+        stateEvent: StateEvent
+    ): Flow<DataState<TvViewState>>
 }

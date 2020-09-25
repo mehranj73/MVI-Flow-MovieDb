@@ -21,4 +21,5 @@ interface TvDao {
     @Query("SELECT * FROM tv_table WHERE id= :tvId")
     suspend fun getTv(tvId: Int): TvEntity
 
+
 }

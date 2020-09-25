@@ -3,6 +3,7 @@ package com.mehranj73.moviedb.data.remote
 import com.mehranj73.moviedb.data.model.MovieEntity
 import com.mehranj73.moviedb.data.remote.response.MovieResponse
 import com.mehranj73.moviedb.data.model.TrendingEntity
+import com.mehranj73.moviedb.data.model.TvEntity
 import com.mehranj73.moviedb.data.remote.response.TrendingResponse
 import com.mehranj73.moviedb.data.remote.response.TvResponse
 import com.mehranj73.moviedb.util.Constants.API_KEY
@@ -36,5 +37,10 @@ interface RetrofitService {
 
 
 
+    @GET("tv/{tv_id}")
+    suspend fun getTvDetail(
+        @Path("tv_id") tvId: Int,
+        @Query("api_key") apiKey: String = API_KEY
+    ): TvEntity
 
 }

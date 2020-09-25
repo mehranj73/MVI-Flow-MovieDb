@@ -28,7 +28,7 @@ interface MovieDao {
     @Query(
         """
         UPDATE movie_table SET budget = :budget, revenue = :revenue,
-runtime = :runtime, status =:status WHERE id = :id
+                    runtime = :runtime, status =:status WHERE id = :id
     """
     )
     suspend fun updateMovie(id: Int, budget: Int, revenue: Int, runtime: Int, status: String)

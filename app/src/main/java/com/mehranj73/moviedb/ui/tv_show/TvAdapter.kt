@@ -48,7 +48,7 @@ class TvAdapter(
             }
 
             cardView.setOnClickListener {
-
+                interaction?.onItemSelected(adapterPosition, tvEntity)
             }
 
 
@@ -111,7 +111,7 @@ class TvAdapter(
 
     interface Interaction {
 
-        fun onItemSelected(position: Int, item: MovieEntity)
+        fun onItemSelected(position: Int, item: TvEntity)
 
 
     }

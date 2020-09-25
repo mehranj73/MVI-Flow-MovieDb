@@ -12,7 +12,18 @@ sealed class TvStateEvent : StateEvent {
         }
 
         override fun toString(): String {
-            return "NowPlayingEvent"
+            return "TvAiringTodayEvent"
+        }
+
+    }
+    object TvDetailEvent : TvStateEvent(){
+
+        override fun errorInfo(): String {
+            return "Error getting tv detail"
+        }
+
+        override fun toString(): String {
+            return "TvDetailEvent"
         }
 
     }

@@ -14,6 +14,7 @@ import com.bumptech.glide.RequestManager
 import com.bumptech.glide.request.RequestOptions
 import com.mehranj73.moviedb.R
 import com.mehranj73.moviedb.data.model.MovieEntity
+import com.mehranj73.moviedb.data.model.TvEntity
 import com.mehranj73.moviedb.ui.movie.MovieAdapter
 import com.mehranj73.moviedb.ui.tv_show.state.TvStateEvent
 import com.mehranj73.moviedb.util.StateMessageCallback
@@ -129,7 +130,10 @@ class TvFragment : BaseTvFragment(R.layout.fragment_tv), TvAdapter.Interaction {
         requestManager = null
     }
 
-    override fun onItemSelected(position: Int, item: MovieEntity) {
+
+    override fun onItemSelected(position: Int, item: TvEntity) {
+        viewModel.setTvId(item.id)
+        findNavController().navigate(R.id.action_TvFragment_to_tvDetailFragment)
 
     }
 

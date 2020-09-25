@@ -1,5 +1,6 @@
 package com.mehranj73.moviedb.ui.tv_show
 
+import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import com.mehranj73.moviedb.data.model.MovieEntity
@@ -9,6 +10,8 @@ import com.mehranj73.moviedb.ui.BaseViewModel
 import com.mehranj73.moviedb.ui.movie.state.MovieStateEvent
 import com.mehranj73.moviedb.ui.movie.state.MovieViewState
 import com.mehranj73.moviedb.ui.tv_show.state.TvStateEvent
+import com.mehranj73.moviedb.ui.tv_show.state.TvStateEvent.TvAiringTodayEvent
+import com.mehranj73.moviedb.ui.tv_show.state.TvStateEvent.TvDetailEvent
 import com.mehranj73.moviedb.ui.tv_show.state.TvViewState
 import com.mehranj73.moviedb.util.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -29,6 +32,11 @@ class TvViewModel @ViewModelInject constructor(
             tvs?.let {
                 setTvsData(it)
             }
+        }
+        data.tvDetailFields.let {tvDetailFields ->
+            tvDetailFields.tvEntity?.let {
+                setMovieDetail(it)
+            }
 
         }
     }
@@ -37,11 +45,18 @@ class TvViewModel @ViewModelInject constructor(
         if (!isJobAlreadyActive(stateEvent)) {
             val job: Flow<DataState<TvViewState>> = when (stateEvent) {
 
-                is TvStateEvent.TvAiringTodayEvent -> {
+                is TvAiringTodayEvent -> {
                     tvRepository.getTvAiringToday(
                         stateEvent = stateEvent
                     )
 
+                }
+
+                is TvDetailEvent -> {
+                    tvRepository.getTvDetail(
+                        stateEvent = stateEvent,
+                        tvId = getTvId()
+                    )
                 }
 
 
@@ -79,4 +94,24 @@ class TvViewModel @ViewModelInject constructor(
         update.tvs = tvs
         setViewState(update)
     }
+
+    fun setTvId(tvId: Int) {
+        val update = getCurrentViewStateOrNew()
+        val tvDetailFields = update.tvDetailFields
+        tvDetailFields.tvId = tvId
+        update.tvDetailFields = tvDetailFields
+        setViewState(update)
+    }
+
+    fun getTvId(): Int {
+        return getCurrentViewStateOrNew().tvDetailFields.tvId ?: 0
+    }
+
+
+    private fun setMovieDetail(tvEntity: TvEntity) {
+        val update = getCurrentViewStateOrNew()
+        update.tvDetailFields.tvEntity = tvEntity
+        setViewState(update)
+    }
+
 }

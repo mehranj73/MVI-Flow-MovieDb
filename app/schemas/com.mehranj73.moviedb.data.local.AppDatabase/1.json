@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "99642005e270fc0f315deecf82980527",
+    "identityHash": "41efaf9ed15fd8176e4d25bf6b5ef5b8",
     "entities": [
       {
         "tableName": "movie_table",
@@ -208,7 +208,7 @@
       },
       {
         "tableName": "tv_table",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`backdrop_path` TEXT, `first_air_date` TEXT NOT NULL, `id` INTEGER NOT NULL, `name` TEXT NOT NULL, `overview` TEXT NOT NULL, `popularity` REAL NOT NULL, `poster_path` TEXT NOT NULL, `vote_average` REAL NOT NULL, `vote_count` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`backdrop_path` TEXT, `first_air_date` TEXT NOT NULL, `id` INTEGER NOT NULL, `name` TEXT NOT NULL, `overview` TEXT NOT NULL, `popularity` REAL NOT NULL, `poster_path` TEXT NOT NULL, `vote_average` REAL NOT NULL, `vote_count` INTEGER NOT NULL, `episodeRunTime` TEXT, `last_air_date` TEXT, `number_of_episodes` INTEGER, `number_of_seasons` INTEGER, `seasons` TEXT, `status` TEXT, `type` TEXT, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "backdrop_path",
@@ -263,6 +263,48 @@
             "columnName": "vote_count",
             "affinity": "INTEGER",
             "notNull": true
+          },
+          {
+            "fieldPath": "episodeRunTime",
+            "columnName": "episodeRunTime",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "last_air_date",
+            "columnName": "last_air_date",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "number_of_episodes",
+            "columnName": "number_of_episodes",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "number_of_seasons",
+            "columnName": "number_of_seasons",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "seasons",
+            "columnName": "seasons",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "status",
+            "columnName": "status",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "type",
+            "columnName": "type",
+            "affinity": "TEXT",
+            "notNull": false
           }
         ],
         "primaryKey": {
@@ -278,7 +320,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '99642005e270fc0f315deecf82980527')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '41efaf9ed15fd8176e4d25bf6b5ef5b8')"
     ]
   }
 }
