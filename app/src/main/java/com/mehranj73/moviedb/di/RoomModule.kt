@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.mehranj73.moviedb.data.local.AppDatabase
 import com.mehranj73.moviedb.data.local.MovieDao
 import com.mehranj73.moviedb.data.local.TrendingDao
+import com.mehranj73.moviedb.data.local.TvDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -42,6 +43,12 @@ object RoomModule {
     @Provides
     fun provideTrendingDao(appDatabase: AppDatabase): TrendingDao {
         return appDatabase.trendingDao()
+    }
+
+    @Singleton
+    @Provides
+    fun provideTvDao(appDatabase: AppDatabase): TvDao {
+        return appDatabase.tvDao()
     }
 
 }

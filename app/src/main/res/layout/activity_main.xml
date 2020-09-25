@@ -42,9 +42,9 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:lottie_autoPlay="false"
+            app:lottie_autoPlay="true"
             app:lottie_rawRes="@raw/movie_loading"
-            android:visibility="gone"
+            android:visibility="visible"
             app:lottie_loop="true" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

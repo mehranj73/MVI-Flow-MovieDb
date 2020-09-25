@@ -96,17 +96,9 @@ class TvAdapter(
 
 
 
-    interface Interaction {
-
-        fun onItemSelected(position: Int, item: MovieEntity)
-
-
-    }
-
-
     fun preloadGlideImages(
         requestManager: RequestManager,
-        list: List<MovieEntity>
+        list: List<TvEntity>
     ){
         for(movie in list){
             requestManager
@@ -116,4 +108,13 @@ class TvAdapter(
         }
     }
 
+
+    interface Interaction {
+
+        fun onItemSelected(position: Int, item: MovieEntity)
+
+
+    }
+
 }
+

@@ -2,11 +2,9 @@ package com.mehranj73.moviedb.di
 
 import com.mehranj73.moviedb.data.local.MovieDao
 import com.mehranj73.moviedb.data.local.TrendingDao
+import com.mehranj73.moviedb.data.local.TvDao
 import com.mehranj73.moviedb.data.remote.RetrofitService
-import com.mehranj73.moviedb.data.repository.MovieRepository
-import com.mehranj73.moviedb.data.repository.MovieRepositoryImpl
-import com.mehranj73.moviedb.data.repository.TrendingRepository
-import com.mehranj73.moviedb.data.repository.TrendingRepositoryImpl
+import com.mehranj73.moviedb.data.repository.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -35,6 +33,14 @@ object RepositoryModule {
         trendingDao: TrendingDao
     ): TrendingRepository {
         return TrendingRepositoryImpl(retrofitService, trendingDao)
+    }
+    @Singleton
+    @Provides
+    fun provideTvRepository(
+        retrofitService: RetrofitService,
+        tvDao: TvDao
+    ): TvRepository {
+        return TvRepositoryImpl(retrofitService, tvDao)
     }
 
 }

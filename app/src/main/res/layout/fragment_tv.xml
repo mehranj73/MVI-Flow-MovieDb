@@ -5,19 +5,9 @@
     android:layout_height="match_parent"
     tools:context=".ui.tv_show.TvFragment">
 
-
-    <TextView
-        android:textSize="25sp"
-        android:gravity="center"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/tvRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="tv fragment" />
-
-    <Button
-        android:layout_gravity="center|top"
-        android:id="@+id/go_to_tv_detail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="go to tv detail" />
+        android:layout_height="match_parent" />
 
 </FrameLayout>
