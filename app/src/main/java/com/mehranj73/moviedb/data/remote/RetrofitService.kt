@@ -28,6 +28,11 @@ interface RetrofitService {
         @Query("api_key") apiKey: String = API_KEY
     ): TrendingResponse
 
+    @GET("tv/get-tv-airing-today")
+    suspend fun getAllTv(
+        @Query("api_key") apiKey: String = API_KEY
+    ): TrendingResponse
+
 
 
 
