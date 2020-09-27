@@ -77,7 +77,7 @@ class MovieDetailFragment(
         requestManager
             .load(movieEntity.poster_path.originalPosterUrl())
             .thumbnail(requestManager.load(movieEntity.poster_path.w154PosterUrl()))
-            .into(profile_imageView)
+            .into(poster_imageView)
 
         movieEntity.revenue?.let {
             revenu_textView.text = it.toString()

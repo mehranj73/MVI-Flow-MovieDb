@@ -11,7 +11,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.mehranj73.moviedb.R
 import com.mehranj73.moviedb.ui.movie.MovieDetailFragment
 import com.mehranj73.moviedb.ui.tv_show.TvDetailFragment
-import com.mehranj73.moviedb.ui.tv_show.TvEpisodesFragment
 import com.mehranj73.moviedb.util.BottomNavController
 import com.mehranj73.moviedb.util.BottomNavController.*
 import com.mehranj73.moviedb.util.setUpNavigation

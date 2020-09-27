@@ -10,7 +10,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/profile_imageView"
+            android:id="@+id/poster_imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -32,7 +32,7 @@
             android:textSize="24sp"
             app:layout_constraintEnd_toStartOf="@+id/score_textView"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_imageView"
+            app:layout_constraintTop_toBottomOf="@+id/poster_imageView"
             tools:text="Money Plane" />
 
         <TextView
@@ -43,7 +43,7 @@
             android:layout_marginEnd="36dp"
             android:textSize="86sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_imageView"
+            app:layout_constraintTop_toBottomOf="@+id/poster_imageView"
             tools:text="5.2" />
 
         <TextView

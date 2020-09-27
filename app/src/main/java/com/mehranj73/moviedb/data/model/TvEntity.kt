@@ -25,6 +25,8 @@ data class TvEntity(
 
     val last_air_date: String?,
 
+    val in_production: Boolean?,
+
     val number_of_episodes: Int?,
     val number_of_seasons: Int?,
 
