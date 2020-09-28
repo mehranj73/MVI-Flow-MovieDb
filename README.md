@@ -2,7 +2,7 @@
 
 Hilt, Navigation Component, Retrofit, Flow, Room For Caching and Bottom Navigation with their own independent back stacks
 
-![screenshot](https://github.com/moeindev/Weatherfo/blob/master/readme_files/s1.png)
+![screenshot](https://github.com/moeindev/MVI-Flow-MovieDb/blob/master/readme_files/s1.png)
 
 There is no pagination cause I didn't want to spend much time on it. 
 
