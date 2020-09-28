@@ -10,17 +10,13 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.request.RequestOptions
 import com.mehranj73.moviedb.R
-import com.mehranj73.moviedb.ui.movie.MovieAdapter
 import com.mehranj73.moviedb.ui.trending.state.TrendingStateEvent.GetAllTrending
 import com.mehranj73.moviedb.util.StateMessageCallback
 import com.mehranj73.moviedb.util.TopSpacingItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.movie_fragment.*
-import kotlinx.android.synthetic.main.movie_fragment.movieRecyclerView
 import kotlinx.android.synthetic.main.trending_fragment.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import javax.inject.Inject
 
 private const val TAG = "TrendingFragment"
 
@@ -35,10 +31,6 @@ class TrendingFragment(
 
     private lateinit var trendingAdapter: TrendingAdapter
 
-    @Inject
-    lateinit var requestOptions: RequestOptions
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(true)
@@ -49,22 +41,22 @@ class TrendingFragment(
 
     }
 
-    private fun subscribeObservers(){
+    private fun subscribeObservers() {
 
         viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
             if (viewState != null) {
                 viewState.allTrending?.let {
                     trendingAdapter.apply {
-                            preloadGlideImages(
-                                requestManager = requestManager as RequestManager,
-                                list = it
-                            )
-                            differ.submitList(it)
+                        preloadGlideImages(
+                            requestManager = requestManager as RequestManager,
+                            list = it
+                        )
+                        differ.submitList(it)
 
-                        }
                     }
                 }
             }
+        }
 
         )
 
@@ -117,5 +109,11 @@ class TrendingFragment(
 
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        // clear references (can leak memory)
+        trendingRecyclerView.adapter = null
+        requestManager = null
+    }
 
 }

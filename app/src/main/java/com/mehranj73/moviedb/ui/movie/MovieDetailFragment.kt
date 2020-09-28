@@ -26,15 +26,15 @@ class MovieDetailFragment(
 
 ) : BaseMovieFragment(R.layout.movie_detail_fragment) {
 
+
     @Inject
     lateinit var requestManager: RequestManager
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(true)
-        setHasOptionsMenu(true)
         viewModel.setStateEvent(MovieDetailEvent)
-
+        uiCommunicationListener.expandAppBar()
         subscribeObservers()
 
     }

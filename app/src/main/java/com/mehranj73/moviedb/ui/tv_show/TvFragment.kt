@@ -38,13 +38,9 @@ class TvFragment : BaseTvFragment(R.layout.fragment_tv), TvAdapter.Interaction {
 
     private lateinit var tvAdapter: TvAdapter
 
-    @Inject
-    lateinit var requestOptions: RequestOptions
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(false)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(true)
         setHasOptionsMenu(true)
 
         viewModel.setStateEvent(TvStateEvent.TvAiringTodayEvent)

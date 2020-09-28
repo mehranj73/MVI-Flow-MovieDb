@@ -20,22 +20,7 @@
         tools:layout="@layout/tv_detail_fragment"
         android:label="TvDetailFragment" >
         <action
-            android:id="@+id/action_tvDetailFragment_to_tvEpisodesFragment"
-            app:destination="@id/tvEpisodesFragment" />
-        <action
             android:id="@+id/action_tvDetailFragment_to_tvFragment"
-            app:destination="@id/tvFragment"
-            app:popUpTo="@+id/nav_tv"
-            app:popUpToInclusive="true"
-            />
-    </fragment>
-    <fragment
-        android:id="@+id/tvEpisodesFragment"
-        android:name="com.mehranj73.moviedb.ui.tv_show.TvEpisodesFragment"
-        tools:layout="@layout/tv_episodes_fragment"
-        android:label="TvEpisodesFragment" >
-        <action
-            android:id="@+id/action_tvEpisodesFragment_to_tvFragment"
             app:destination="@id/tvFragment"
             app:popUpTo="@+id/nav_tv"
             app:popUpToInclusive="true"

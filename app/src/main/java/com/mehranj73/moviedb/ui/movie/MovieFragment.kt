@@ -34,14 +34,10 @@ class MovieFragment(
 
     private lateinit var movieAdapter: MovieAdapter
 
-    @Inject
-    lateinit var requestOptions: RequestOptions
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(true)
-        setHasOptionsMenu(true)
 
         setupGlide()
         initRecyclerView()

@@ -3,6 +3,7 @@ package com.mehranj73.moviedb.ui.tv_show
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -43,9 +44,10 @@ class TvDetailFragment : BaseTvFragment(R.layout.tv_detail_fragment), TvSeasonsA
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(true)
+        uiCommunicationListener.expandAppBar()
         viewModel.setStateEvent(TvDetailEvent)
-        setupGlide()
+
         initRecyclerView()
         subscribeObservers()
 
@@ -56,7 +58,7 @@ class TvDetailFragment : BaseTvFragment(R.layout.tv_detail_fragment), TvSeasonsA
         viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
             viewState?.tvDetailFields?.let { tvDetailFields ->
                 tvDetailFields.tvEntity?.let {
-                    Log.d(TAG, "subscribeObservers: ${it.number_of_seasons}")
+
                     setTvDetail(it)
                     it.seasons?.let {seasons ->
                         seasonsAdapter.differ.submitList(seasons)
@@ -112,17 +114,6 @@ class TvDetailFragment : BaseTvFragment(R.layout.tv_detail_fragment), TvSeasonsA
         }
 
 
-    }
-
-    private fun setupGlide() {
-        val requestOptions = RequestOptions
-            .placeholderOf(R.drawable.default_image)
-            .error(R.drawable.default_image)
-
-        activity?.let {
-            requestManager = Glide.with(it)
-                .applyDefaultRequestOptions(requestOptions)
-        }
     }
 
     private fun initRecyclerView() {

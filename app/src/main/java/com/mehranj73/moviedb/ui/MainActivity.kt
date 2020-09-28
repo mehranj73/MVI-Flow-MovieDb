@@ -88,10 +88,6 @@ class MainActivity : BaseActivity(),
                 navController.navigate(R.id.action_tvDetailFragment_to_tvFragment)
 
             }
-            is TvEpisodesFragment -> {
-                navController.navigate(R.id.action_tvEpisodesFragment_to_tvFragment)
-
-            }
 
             else -> {
 

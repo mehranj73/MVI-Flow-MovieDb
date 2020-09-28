@@ -103,7 +103,7 @@ dependencies {
     implementation "com.afollestad.material-dialogs:core:3.3.0"
 
     // Leak Canary
-   // debugImplementation "com.squareup.leakcanary:leakcanary-android:2.4"
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:2.4"
 
 
     // Recyclerview
