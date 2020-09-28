@@ -96,12 +96,12 @@ class TvSeasonsAdapter(
 
     fun preloadGlideImages(
         requestManager: RequestManager,
-        list: List<TvEntity>
+        list: List<Season>
     ) {
-        for (movie in list) {
+        for (season in list) {
             requestManager
-                .load(movie.poster_path.originalPosterUrl())
-                .thumbnail(requestManager.load(movie.poster_path.w92PosterUrl()))
+                .load(season.poster_path?.originalPosterUrl())
+                .thumbnail(requestManager.load(season.poster_path?.w92PosterUrl()))
                 .preload()
         }
     }

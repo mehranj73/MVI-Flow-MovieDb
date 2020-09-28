@@ -37,8 +37,8 @@ private const val TAG = "TvDetailFragment"
 @AndroidEntryPoint
 class TvDetailFragment : BaseTvFragment(R.layout.tv_detail_fragment), TvSeasonsAdapter.Interaction {
 
-    @Inject
-    lateinit var requestManager: RequestManager
+
+    var requestManager: RequestManager? = null
 
     private lateinit var seasonsAdapter: TvSeasonsAdapter
 
@@ -47,7 +47,7 @@ class TvDetailFragment : BaseTvFragment(R.layout.tv_detail_fragment), TvSeasonsA
         (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(true)
         uiCommunicationListener.expandAppBar()
         viewModel.setStateEvent(TvDetailEvent)
-
+        setupGlide()
         initRecyclerView()
         subscribeObservers()
 
@@ -55,13 +55,21 @@ class TvDetailFragment : BaseTvFragment(R.layout.tv_detail_fragment), TvSeasonsA
 
     private fun subscribeObservers() {
 
-        viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
+        viewModel.viewState.observe(viewLifecycleOwner, { viewState ->
             viewState?.tvDetailFields?.let { tvDetailFields ->
                 tvDetailFields.tvEntity?.let {
 
                     setTvDetail(it)
                     it.seasons?.let {seasons ->
-                        seasonsAdapter.differ.submitList(seasons)
+                        seasonsAdapter.apply {
+                            preloadGlideImages(
+                                requestManager = requestManager as RequestManager,
+                                list = it.seasons
+                            )
+                            differ.submitList(seasons)
+
+                        }
+
                     }
 
                 }
@@ -72,7 +80,7 @@ class TvDetailFragment : BaseTvFragment(R.layout.tv_detail_fragment), TvSeasonsA
             uiCommunicationListener.displayProgressBar(viewModel.areAnyJobsActive())
         })
 
-        viewModel.stateMessage.observe(viewLifecycleOwner, Observer { stateMessage ->
+        viewModel.stateMessage.observe(viewLifecycleOwner, { stateMessage ->
             stateMessage?.let {
                 uiCommunicationListener.onResponseReceived(
                     response = it.response,
@@ -94,16 +102,19 @@ class TvDetailFragment : BaseTvFragment(R.layout.tv_detail_fragment), TvSeasonsA
         overview_textView.text = tvEntity.overview
         first_air_date_textView.text = tvEntity.first_air_date
 
-        requestManager
-            .load(tvEntity.poster_path.originalPosterUrl())
-            .thumbnail(requestManager.load(tvEntity.poster_path.w154PosterUrl()))
-            .into(poster_imageView)
+        requestManager?.let {
+            it
+                .load(tvEntity.poster_path?.originalPosterUrl())
+                .thumbnail(it.load(tvEntity.poster_path?.w154PosterUrl()))
+                .into(poster_imageView)
+        }
+
 
         tvEntity.last_air_date?.let {
-            last_air_date_textView.text = it.toString()
+            last_air_date_textView.text = it
         }
         tvEntity.type?.let {
-            type_textView.text = it.toString()
+            type_textView.text = it
         }
         tvEntity.status?.let {
             status_textView.text = it
@@ -129,6 +140,24 @@ class TvDetailFragment : BaseTvFragment(R.layout.tv_detail_fragment), TvSeasonsA
             adapter = seasonsAdapter
         }
 
+    }
+
+    private fun setupGlide() {
+        val requestOptions = RequestOptions
+            .placeholderOf(R.drawable.default_image)
+            .error(R.drawable.default_image)
+
+        activity?.let {
+            requestManager = Glide.with(it)
+                .applyDefaultRequestOptions(requestOptions)
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        // clear references (can leak memory)
+        tv_seasons_recyclerView.adapter = null
+        requestManager = null
     }
 
     override fun onItemSelected(position: Int, item: Season) {

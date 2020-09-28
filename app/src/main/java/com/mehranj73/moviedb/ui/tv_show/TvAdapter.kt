@@ -23,7 +23,7 @@ class TvAdapter(
 ) : RecyclerView.Adapter<TvAdapter.TvViewHolder>() {
 
 
-    inner class TvViewHolder(itemView: View, requestManager: RequestManager) :
+    inner class TvViewHolder(itemView: View, var requestManager: RequestManager) :
         RecyclerView.ViewHolder(itemView) {
         private val name: TextView = itemView.findViewById(R.id.name_textView)
         private val voteAverage: TextView = itemView.findViewById(R.id.vote_average_textView)
@@ -40,7 +40,7 @@ class TvAdapter(
             overView.text = tvEntity.overview
 
 
-            tvEntity.poster_path.let {
+            tvEntity.poster_path?.let {
                 requestManager
                     .load(it.originalPosterUrl())
                     .thumbnail(requestManager.load(it.w92PosterUrl()))
@@ -102,8 +102,8 @@ class TvAdapter(
     ){
         for(movie in list){
             requestManager
-                .load(movie.poster_path.originalPosterUrl())
-                .thumbnail(requestManager.load(movie.poster_path.w92PosterUrl()))
+                .load(movie.poster_path?.originalPosterUrl())
+                .thumbnail(requestManager.load(movie.poster_path?.w92PosterUrl()))
                 .preload()
         }
     }
